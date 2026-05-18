@@ -1,0 +1,55 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# Virtual environments and local env
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Build/package artifacts
+build/
+dist/
+*.egg-info/
+*.whl
+
+# Runtime/output artifacts
+runs/
+artifacts/
+.cache/
+*.jsonl
+*.parquet
+
+# Models and large binaries
+models/
+datasets/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.trt
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Secrets / wallets / keys
+mywallet/
+my_coldkey/
+*.key
+*.pem
+*.crt
+*.p12
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

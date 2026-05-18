@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "score-miner-core"
+version = "0.1.1"
+description = "TurboVision football miner runtime and benchmarking tools"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=2.2,<2.3",
+  "pydantic>=2",
+  "psutil>=7",
+  "supervision==0.28.0",
+]
+
+[project.optional-dependencies]
+vision = [
+  "opencv-python-headless>=4.12",
+]
+rfdetr = [
+  "rfdetr",
+]
+transformers = [
+  "transformers>=5.3",
+  "accelerate",
+]
+pytorch = [
+  "torch==2.11.0",
+  "torchvision==0.26.0",
+]
+dev = [
+  "pytest",
+  "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["score_miner_core*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
