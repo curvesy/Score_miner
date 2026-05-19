@@ -6,6 +6,7 @@ import numpy as np
 import supervision as sv
 
 from score_miner_core.detector.base import DetectorBase
+from score_miner_core.detector.class_id_mapper import DetectionClassIdMapper
 
 
 class RFDETRRunner(DetectorBase):
@@ -18,14 +19,25 @@ class RFDETRRunner(DetectorBase):
         model_size: str = "medium",
         threshold: float = 0.35,
         model: Any | None = None,
+        class_id_mapper: DetectionClassIdMapper | None = None,
+        optimize_for_inference: bool = True,
     ) -> None:
         self.threshold = threshold
         self.model = model or _create_rfdetr_model(model_size)
+        if optimize_for_inference:
+            _optimize_for_inference(self.model)
+        self.class_id_mapper = class_id_mapper
 
     def predict(self, batch_images: list[np.ndarray]) -> list[sv.Detections]:
         # RF-DETR's public API is image-oriented; keep batching at our router
         # level until the library exposes a stable batched API.
-        return [_coerce_to_detections(self.model.predict(image, threshold=self.threshold)) for image in batch_images]
+        detections = [
+            _coerce_to_detections(self.model.predict(image, threshold=self.threshold))
+            for image in batch_images
+        ]
+        if self.class_id_mapper is None:
+            return detections
+        return [self.class_id_mapper.apply(frame_detections) for frame_detections in detections]
 
 
 def _create_rfdetr_model(model_size: str):
@@ -52,6 +64,12 @@ def _create_rfdetr_model(model_size: str):
     except AttributeError as exc:
         raise ValueError(f"Unsupported RF-DETR model size/class: {model_size}") from exc
     return model_cls()
+
+
+def _optimize_for_inference(model: Any) -> None:
+    optimize = getattr(model, "optimize_for_inference", None)
+    if callable(optimize):
+        optimize()
 
 
 def _coerce_to_detections(result: Any) -> sv.Detections:

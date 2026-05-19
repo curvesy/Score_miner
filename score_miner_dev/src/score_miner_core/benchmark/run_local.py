@@ -12,6 +12,7 @@ import supervision as sv
 
 from score_miner_core.benchmark.latency import latency_summary
 from score_miner_core.benchmark.schema_check import SchemaCheckResult, validate_frame_results
+from score_miner_core.detector.detector_router import create_detector
 from score_miner_core.runtime.memory_budget import MemoryBudget
 from score_miner_core.runtime.miner_runtime import MinerRuntime
 
@@ -42,11 +43,17 @@ class BenchmarkReport(BaseModel):
     n_keypoints: int = Field(gt=0)
     batches: int
     frames_processed: int
+    boxes_total: int
+    boxes_per_frame_mean: float
+    boxes_per_frame_max: int
     latency: dict[str, float]
     memory_before: dict[str, Any]
     memory_after_load: dict[str, Any]
     memory_after_predict: dict[str, Any]
     schema_check: SchemaCheckResult
+    detector: str
+    threshold: float
+    optimize_for_inference: bool
 
 
 def load_video_frames(
@@ -95,10 +102,22 @@ def run_benchmark(
     stride: int,
     start: int,
     path_hf_repo: Path,
+    detector_name: str,
+    threshold: float,
+    player_cls_id: int,
+    ball_cls_id: int | None,
+    optimize_for_inference: bool,
 ) -> BenchmarkReport:
     memory_budget = MemoryBudget()
     memory_before = memory_budget.status()
-    miner = MinerRuntime(path_hf_repo)
+    detector = create_detector(
+        detector_name,
+        threshold=threshold,
+        player_cls_id=player_cls_id,
+        ball_cls_id=ball_cls_id,
+        optimize_for_inference=optimize_for_inference,
+    )
+    miner = MinerRuntime(path_hf_repo, detector=detector)
     memory_after_load = memory_budget.status()
 
     frames, video_summary = load_video_frames(
@@ -123,6 +142,10 @@ def run_benchmark(
         expected_frame_count=len(frames),
         n_keypoints=n_keypoints,
     )
+    box_counts = [
+        len(result.boxes if not hasattr(result, "model_dump") else result.model_dump()["boxes"])
+        for result in all_results
+    ]
 
     return BenchmarkReport(
         video=video_summary,
@@ -130,11 +153,17 @@ def run_benchmark(
         n_keypoints=n_keypoints,
         batches=len(batch_latencies_ms),
         frames_processed=len(frames),
+        boxes_total=sum(box_counts),
+        boxes_per_frame_mean=round(sum(box_counts) / len(box_counts), 4) if box_counts else 0.0,
+        boxes_per_frame_max=max(box_counts) if box_counts else 0,
         latency=latency_summary(batch_latencies_ms),
         memory_before=memory_before,
         memory_after_load=memory_after_load,
         memory_after_predict=memory_after_predict,
         schema_check=schema_check,
+        detector=detector_name,
+        threshold=threshold,
+        optimize_for_inference=optimize_for_inference,
     )
 
 
@@ -171,6 +200,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--stride", type=int, default=1)
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--path-hf-repo", type=Path, default=Path("score_miner"))
+    parser.add_argument("--detector", default="empty")
+    parser.add_argument("--threshold", type=float, default=0.35)
+    parser.add_argument("--player-cls-id", type=int, default=0)
+    parser.add_argument("--ball-cls-id", type=int, default=None)
+    parser.add_argument(
+        "--no-optimize-for-inference",
+        action="store_true",
+        help="Disable detector-specific inference optimization.",
+    )
     parser.add_argument("--output", type=Path, default=Path(DEFAULT_NOTES))
     return parser.parse_args()
 
@@ -185,6 +223,11 @@ def main() -> None:
         stride=args.stride,
         start=args.start,
         path_hf_repo=args.path_hf_repo,
+        detector_name=args.detector,
+        threshold=args.threshold,
+        player_cls_id=args.player_cls_id,
+        ball_cls_id=args.ball_cls_id,
+        optimize_for_inference=not args.no_optimize_for_inference,
     )
     write_markdown_report(report, args.output)
     print(json.dumps(report.model_dump(mode="json"), indent=2, sort_keys=True))

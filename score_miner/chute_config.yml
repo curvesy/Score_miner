@@ -4,6 +4,7 @@ Image:
     - pip install --upgrade setuptools wheel
     - pip install 'numpy>=2.2,<2.3' 'pydantic>=2' 'psutil>=7' 'supervision==0.28.0' 'opencv-python-headless>=4.12'
     - pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
+    - pip install rfdetr
     - pip install dist/score_miner_core-0.1.1-py3-none-any.whl
   set_workdir: /app
 

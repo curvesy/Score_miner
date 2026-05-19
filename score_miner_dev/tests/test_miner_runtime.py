@@ -22,6 +22,7 @@ def test_runtime_converts_supervision_detections() -> None:
     result = runtime.predict_batch([np.zeros((8, 8, 3), dtype=np.uint8)], offset=3, n_keypoints=2)[0]
 
     assert result.frame_id == 3
+    assert len(result.boxes) == 1
     assert result.boxes[0].x1 == 1
     assert result.boxes[0].cls_id == 2
     assert result.boxes[0].conf == 0.75
