@@ -3,7 +3,20 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+export PATH="$HOME/.local/bin:$PATH"
 export UV_TORCH_BACKEND="${UV_TORCH_BACKEND:-auto}"
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "uv is required. Run:"
+  echo "curl -LsSf https://astral.sh/uv/install.sh | sh"
+  echo "source \$HOME/.local/bin/env"
+  exit 1
+fi
+
+if [[ ! -f "data/yolo/car_wash_starter/data.yaml" || ! -f "data/yolo/beverage_starter/data.yaml" ]]; then
+  echo "Starter YOLO data is missing. Downloading and preparing it now..."
+  ./scripts/prepare_phase1_data.sh
+fi
 
 COMMON_ARGS=()
 if [[ -n "${TRAIN_IMGSZ:-}" ]]; then
@@ -37,4 +50,3 @@ uv run python scripts/train_baseline.py \
 echo
 echo "Phase 1B baseline runs completed. Copy back:"
 echo "$(pwd)/runs/"
-

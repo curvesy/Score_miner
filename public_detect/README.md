@@ -35,6 +35,7 @@ ad-hoc package installs:
 
 ```bash
 cd score_miner_project/public_detect
+source $HOME/.local/bin/env  # only needed right after installing uv
 ./scripts/setup_gpu_env.sh
 ```
 
@@ -61,6 +62,13 @@ Run Phase 1B baselines with:
 
 ```bash
 ./scripts/run_phase1b_baselines.sh
+```
+
+If starter data is missing on the rented GPU, the baseline script downloads and
+prepares it automatically. You can also run data prep directly:
+
+```bash
+./scripts/prepare_phase1_data.sh
 ```
 
 If a 16GB GPU runs out of memory:

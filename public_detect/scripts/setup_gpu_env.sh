@@ -3,9 +3,13 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+export PATH="$HOME/.local/bin:$PATH"
+
 if ! command -v uv >/dev/null 2>&1; then
   echo "uv is required. Install with:"
   echo "curl -LsSf https://astral.sh/uv/install.sh | sh"
+  echo "then run:"
+  echo "source \$HOME/.local/bin/env"
   exit 1
 fi
 
