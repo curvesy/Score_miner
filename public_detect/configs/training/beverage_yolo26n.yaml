@@ -1,7 +1,7 @@
-element_config: score_miner_project/public_detect/configs/elements/beverage.yaml
-data: score_miner_project/public_detect/data/yolo/beverage_starter/data.yaml
+element_config: configs/elements/beverage.yaml
+data: data/yolo/beverage_starter/data.yaml
 model: yolo26n.pt
-project: score_miner_project/public_detect/runs/beverage
+project: runs/beverage
 name: yolo26n_starter
 epochs: 80
 imgsz: 960

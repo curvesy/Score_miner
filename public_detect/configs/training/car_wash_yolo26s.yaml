@@ -1,7 +1,7 @@
-element_config: score_miner_project/public_detect/configs/elements/car_wash.yaml
-data: score_miner_project/public_detect/data/yolo/car_wash_starter/data.yaml
+element_config: configs/elements/car_wash.yaml
+data: data/yolo/car_wash_starter/data.yaml
 model: yolo26s.pt
-project: score_miner_project/public_detect/runs/car_wash
+project: runs/car_wash
 name: yolo26s_starter
 epochs: 80
 imgsz: 960

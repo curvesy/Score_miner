@@ -27,7 +27,7 @@ def _suffix_from_url(url: str, default: str) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--element-config", required=True, type=Path)
-    parser.add_argument("--output-root", default=Path("score_miner_project/public_detect/data/starter_packs"), type=Path)
+    parser.add_argument("--output-root", default=Path("data/starter_packs"), type=Path)
     parser.add_argument("--lookback-days", default=4, type=int)
     args = parser.parse_args()
 

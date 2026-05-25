@@ -14,6 +14,10 @@ from ultralytics import YOLO
 from public_detect.elements import load_element_spec
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+LEGACY_PROJECT_PREFIX = "score_miner_project/public_detect/"
+
+
 TRAIN_KEYS = {
     "data",
     "epochs",
@@ -42,13 +46,25 @@ def load_config(path: str | Path) -> dict[str, Any]:
     return data
 
 
+def project_path(value: str | Path) -> Path:
+    """Resolve config paths from this package root, including old repo-root paths."""
+    path_text = str(value)
+    path = Path(path_text)
+    if path.is_absolute():
+        return path
+    if path_text.startswith(LEGACY_PROJECT_PREFIX):
+        path = Path(path_text.removeprefix(LEGACY_PROJECT_PREFIX))
+    return PROJECT_ROOT / path
+
+
 def validate_config(config: dict[str, Any]) -> dict[str, Any]:
     element_config = config.get("element_config")
     if not element_config:
         raise ValueError("training config missing element_config")
-    spec = load_element_spec(element_config)
+    element_config_path = project_path(element_config)
+    spec = load_element_spec(element_config_path)
 
-    data_yaml = Path(str(config["data"]))
+    data_yaml = project_path(config["data"])
     if not data_yaml.exists():
         raise FileNotFoundError(f"dataset yaml does not exist: {data_yaml}")
     dataset = yaml.safe_load(data_yaml.read_text())
@@ -78,9 +94,9 @@ def validate_config(config: dict[str, Any]) -> dict[str, Any]:
 def train_args(config: dict[str, Any], overrides: argparse.Namespace) -> dict[str, Any]:
     args = {key: config[key] for key in TRAIN_KEYS if key in config}
     if "project" in args:
-        args["project"] = str(Path(str(args["project"])).resolve())
+        args["project"] = str(project_path(args["project"]).resolve())
     if "data" in args:
-        args["data"] = str(Path(str(args["data"])).resolve())
+        args["data"] = str(project_path(args["data"]).resolve())
     if overrides.epochs is not None:
         args["epochs"] = overrides.epochs
     if overrides.imgsz is not None:
