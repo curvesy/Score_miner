@@ -1,0 +1,213 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        88,
+        661,
+        151,
+        730
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        54,
+        523,
+        104,
+        599
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        704,
+        509,
+        752,
+        562
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        816,
+        456,
+        855,
+        505
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        504,
+        368,
+        527,
+        410
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        89.07933194154488,
+        350.2651157227439,
+        112.07933194154488,
+        370.2651157227439
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        900,
+        595,
+        937,
+        710
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        44,
+        621,
+        82,
+        705
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        298,
+        530,
+        327,
+        576
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        269,
+        611,
+        312,
+        666
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        284,
+        523,
+        307,
+        578
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        1227,
+        459,
+        1251,
+        503
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        1199.9973903966595,
+        471.7828479157945,
+        1228.9973903966595,
+        502.7828479157945
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        782.6372651356994,
+        462.18001315710785,
+        811.6372651356994,
+        485.18001315710785
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    }
+  ],
+  "frame_idx": 30,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/42642b7b-44b3-40e5-88c3-6866769faed5/versions/558e592b-9550-4250-816e-6571a8fb8c6a/frames/000030.png",
+  "scenario_spec": null
+}

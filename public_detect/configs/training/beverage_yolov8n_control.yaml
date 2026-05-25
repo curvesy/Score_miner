@@ -1,0 +1,20 @@
+element_config: score_miner_project/public_detect/configs/elements/beverage.yaml
+data: score_miner_project/public_detect/data/yolo/beverage_starter/data.yaml
+model: yolov8n.pt
+project: score_miner_project/public_detect/runs/beverage
+name: yolov8n_control_starter
+epochs: 40
+imgsz: 960
+batch: 4
+patience: 10
+device: 0
+workers: 4
+seed: 44
+optimizer: auto
+cos_lr: true
+close_mosaic: 10
+cache: false
+amp: true
+plots: true
+val: true
+

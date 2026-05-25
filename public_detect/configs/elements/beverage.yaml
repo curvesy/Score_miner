@@ -1,0 +1,13 @@
+element_id: manak0/Detect-beverage-detect
+track: public
+max_model_size_mb: 30
+classes:
+  0: cup
+  1: bottle
+  2: can
+priority: 2
+notes:
+  - Easier classes.
+  - Best pipeline proving target.
+  - Hard negatives: jars, glassware, labels, boxes, hands, trash.
+

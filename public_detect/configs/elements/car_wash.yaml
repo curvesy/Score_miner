@@ -1,0 +1,14 @@
+element_id: manak0/Detect-car-wash
+track: public
+max_model_size_mb: 30
+classes:
+  0: broom
+  1: drainage gate
+  2: nozzle
+  3: track
+priority: 1
+notes:
+  - Few competitors.
+  - Best first public target.
+  - Hard negatives: hose, pipe, floor seam, tire, shadow, water reflection.
+

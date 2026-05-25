@@ -1,0 +1,291 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        934,
+        429,
+        967,
+        474
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        68,
+        662,
+        102,
+        697
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        230,
+        405,
+        263,
+        447
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        900,
+        387,
+        929,
+        421
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        709,
+        368,
+        732,
+        404
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        279,
+        264,
+        302,
+        295
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        440,
+        424,
+        468,
+        450
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        826,
+        237,
+        845,
+        263
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        689,
+        232,
+        708,
+        253
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        582,
+        125,
+        595,
+        148
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        1257,
+        275,
+        1280,
+        291
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        621,
+        160.76741821661383,
+        635.0318371607516,
+        175
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        523,
+        376,
+        542,
+        412
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        1374,
+        725,
+        1407,
+        764
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        831,
+        616,
+        860,
+        660
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        651,
+        635,
+        679,
+        679
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        587,
+        435,
+        610,
+        484
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        44,
+        477,
+        72,
+        514
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        1164,
+        429,
+        1192,
+        463
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        416,
+        488,
+        434,
+        522
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    }
+  ],
+  "frame_idx": 274,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/42642b7b-44b3-40e5-88c3-6866769faed5/versions/558e592b-9550-4250-816e-6571a8fb8c6a/frames/000274.png",
+  "scenario_spec": null
+}

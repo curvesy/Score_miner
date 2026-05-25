@@ -1,0 +1,278 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        484,
+        464,
+        512,
+        495
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        1046,
+        403,
+        1069,
+        428
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        1100,
+        395,
+        1119,
+        410
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        39,
+        320,
+        53,
+        335
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        948,
+        288,
+        962,
+        298
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        103,
+        285,
+        111,
+        298
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        552,
+        387,
+        581,
+        450
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        274,
+        616,
+        292,
+        671
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        108,
+        627,
+        126,
+        676
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        1197.9770354906054,
+        596.6612642784522,
+        1225.9770354906054,
+        635.6612642784522
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        626.4180584551149,
+        475.54745529573586,
+        646.4180584551149,
+        520.5474552957357
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        1290.7536534446765,
+        650.3590096286108,
+        1324.7536534446765,
+        718.3590096286108
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        1206.3872651356992,
+        554.2269601100412,
+        1234.3872651356992,
+        584.2269601100412
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        809.9618997912316,
+        374.35225165958974,
+        827.9618997912316,
+        418.35225165958974
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        117,
+        693,
+        151,
+        714
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        357,
+        621,
+        390,
+        639
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        576.5005219206681,
+        456.376233478859,
+        599.5005219206681,
+        505.376233478859
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        152,
+        717,
+        170,
+        748
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        152,
+        640,
+        180,
+        658
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    }
+  ],
+  "frame_idx": 300,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/42642b7b-44b3-40e5-88c3-6866769faed5/versions/558e592b-9550-4250-816e-6571a8fb8c6a/frames/000300.png",
+  "scenario_spec": null
+}

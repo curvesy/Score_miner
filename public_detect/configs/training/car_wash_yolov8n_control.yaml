@@ -1,0 +1,20 @@
+element_config: score_miner_project/public_detect/configs/elements/car_wash.yaml
+data: score_miner_project/public_detect/data/yolo/car_wash_starter/data.yaml
+model: yolov8n.pt
+project: score_miner_project/public_detect/runs/car_wash
+name: yolov8n_control_starter
+epochs: 40
+imgsz: 960
+batch: 4
+patience: 10
+device: 0
+workers: 4
+seed: 44
+optimizer: auto
+cos_lr: true
+close_mosaic: 10
+cache: false
+amp: true
+plots: true
+val: true
+

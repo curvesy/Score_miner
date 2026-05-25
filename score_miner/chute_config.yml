@@ -1,11 +1,13 @@
 Image:
   from_base: parachutes/python:3.12
   run_command:
-    - pip install --upgrade setuptools wheel
-    - pip install 'numpy>=2.2,<2.3' 'pydantic>=2' 'psutil>=7' 'supervision==0.28.0' 'opencv-python-headless>=4.12'
-    - pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
-    - pip install rfdetr
-    - pip install dist/score_miner_core-0.1.1-py3-none-any.whl
+    - UV_HTTP_TIMEOUT=300 pip install --upgrade setuptools wheel
+    - UV_HTTP_TIMEOUT=300 pip install 'numpy>=2.2,<2.3' 'pydantic>=2' 'psutil>=7' 'supervision==0.28.0' 'opencv-python-headless>=4.12'
+    - UV_HTTP_TIMEOUT=300 pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
+    - UV_HTTP_TIMEOUT=300 pip install rfdetr==1.5.2 --no-deps
+    - UV_HTTP_TIMEOUT=300 pip install requests pycocotools scipy tqdm transformers==4.57.6 peft rf100vl matplotlib roboflow 'albumentations<2.0.0,>=1.0.0'
+    - UV_HTTP_TIMEOUT=300 pip install --no-cache-dir --force-reinstall https://huggingface.co/Curvesy/ScoreVision/resolve/ad720d1776e3536f7393c7ce57d94f6c6c7ee783/dist/score_miner_core-0.1.2-py3-none-any.whl
+    - python -c "import rfdetr; import score_miner_core"
   set_workdir: /app
 
 NodeSelector:

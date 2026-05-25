@@ -1,0 +1,148 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        489,
+        688,
+        576,
+        767
+      ],
+      "class": "drainage gate",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "drainage gate"
+    },
+    {
+      "bbox": [
+        1186.409707724426,
+        280.25500867173014,
+        1216.803235908142,
+        305.3099694994318
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        919,
+        503,
+        972,
+        548
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        988,
+        448,
+        1035,
+        485
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1041,
+        405,
+        1084,
+        437
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1090,
+        365,
+        1128,
+        394
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1124,
+        336,
+        1156,
+        362
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1149,
+        317,
+        1177,
+        338
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1169,
+        299,
+        1197,
+        319
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    }
+  ],
+  "frame_idx": 63,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/e973c635-44ee-4967-9cda-f8d048faacf4/versions/d91f6b6b-8b51-420e-bf98-cded0f356efd/frames/000063.png",
+  "scenario_spec": null
+}

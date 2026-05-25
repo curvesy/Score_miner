@@ -1,0 +1,20 @@
+element_config: score_miner_project/public_detect/configs/elements/beverage.yaml
+data: score_miner_project/public_detect/data/yolo/beverage_starter/data.yaml
+model: yolo26n.pt
+project: score_miner_project/public_detect/runs/beverage
+name: yolo26n_starter
+epochs: 80
+imgsz: 960
+batch: 4
+patience: 20
+device: 0
+workers: 4
+seed: 44
+optimizer: auto
+cos_lr: true
+close_mosaic: 10
+cache: false
+amp: true
+plots: true
+val: true
+

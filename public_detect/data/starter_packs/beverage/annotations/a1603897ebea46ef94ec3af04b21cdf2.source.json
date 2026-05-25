@@ -1,0 +1,161 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        499,
+        566,
+        537,
+        610
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        181,
+        579,
+        214,
+        618
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        670,
+        328,
+        688,
+        359
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        469,
+        285,
+        490,
+        300
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        1022,
+        267,
+        1040,
+        276
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        440,
+        216,
+        453,
+        226
+      ],
+      "class": "cup",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "cup"
+    },
+    {
+      "bbox": [
+        436,
+        664,
+        467,
+        727
+      ],
+      "class": "bottle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "bottle"
+    },
+    {
+      "bbox": [
+        939,
+        597,
+        963,
+        655
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        689,
+        619,
+        713,
+        676
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    },
+    {
+      "bbox": [
+        997,
+        371,
+        1016,
+        394
+      ],
+      "class": "can",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "can"
+    }
+  ],
+  "frame_idx": 149,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/42642b7b-44b3-40e5-88c3-6866769faed5/versions/558e592b-9550-4250-816e-6571a8fb8c6a/frames/000149.png",
+  "scenario_spec": null
+}

@@ -1,0 +1,213 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        866,
+        92,
+        1102,
+        549
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        345,
+        96,
+        560,
+        554
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        544,
+        0,
+        903,
+        162
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        532,
+        179,
+        595,
+        497
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        640,
+        539,
+        794,
+        562
+      ],
+      "class": "drainage gate",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "drainage gate"
+    },
+    {
+      "bbox": [
+        323,
+        461,
+        669,
+        765
+      ],
+      "class": "track",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "track"
+    },
+    {
+      "bbox": [
+        345.22546972860124,
+        150.23790443155312,
+        369.1889352818372,
+        166.71538783565575
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        340.67275574112733,
+        262.2388613121225,
+        366.0427974947808,
+        279.1010107051014
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        340.39144050104386,
+        373.7001375515818,
+        370.03288100208766,
+        392.9276957119789
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1080.767223382046,
+        147.5452425094193,
+        1102.3079331941544,
+        166.02069254231205
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1080.5490605427974,
+        260.1605167155074,
+        1101.687891440501,
+        276.8504276060044
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1080.1127348643006,
+        380.1877878117337,
+        1103.0641962421712,
+        399.36600681777406
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1080,
+        491,
+        1104,
+        498
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        345.35751565762007,
+        486.1489145386041,
+        363.08611691022963,
+        500.75473954907
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    }
+  ],
+  "frame_idx": 36,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/e973c635-44ee-4967-9cda-f8d048faacf4/versions/d91f6b6b-8b51-420e-bf98-cded0f356efd/frames/000036.png",
+  "scenario_spec": null
+}

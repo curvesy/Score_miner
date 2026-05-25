@@ -1,0 +1,8 @@
+path: score_miner_project/public_detect/data/yolo/beverage_starter
+train: images/train
+val: images/train
+nc: 3
+names:
+  0: cup
+  1: bottle
+  2: can

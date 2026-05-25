@@ -107,6 +107,7 @@ def run_benchmark(
     player_cls_id: int,
     ball_cls_id: int | None,
     optimize_for_inference: bool,
+    input_color_space: str,
 ) -> BenchmarkReport:
     memory_budget = MemoryBudget()
     memory_before = memory_budget.status()
@@ -117,7 +118,7 @@ def run_benchmark(
         ball_cls_id=ball_cls_id,
         optimize_for_inference=optimize_for_inference,
     )
-    miner = MinerRuntime(path_hf_repo, detector=detector)
+    miner = MinerRuntime(path_hf_repo, detector=detector, input_color_space=input_color_space)
     memory_after_load = memory_budget.status()
 
     frames, video_summary = load_video_frames(
@@ -205,6 +206,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--player-cls-id", type=int, default=0)
     parser.add_argument("--ball-cls-id", type=int, default=None)
     parser.add_argument(
+        "--input-color-space",
+        choices=("rgb", "bgr"),
+        default="rgb",
+        help="Color order produced by this local frame loader. Chutes runtime defaults to bgr.",
+    )
+    parser.add_argument(
         "--no-optimize-for-inference",
         action="store_true",
         help="Disable detector-specific inference optimization.",
@@ -228,6 +235,7 @@ def main() -> None:
         player_cls_id=args.player_cls_id,
         ball_cls_id=args.ball_cls_id,
         optimize_for_inference=not args.no_optimize_for_inference,
+        input_color_space=args.input_color_space,
     )
     write_markdown_report(report, args.output)
     print(json.dumps(report.model_dump(mode="json"), indent=2, sort_keys=True))

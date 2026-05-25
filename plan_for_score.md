@@ -4,6 +4,48 @@ Date: 2026-05-18
 
 Goal: build a top-tier TurboVision football miner from the cloned `turbovision/` repo. The strategy is a **chunk-aware football perception system**, not just a single-frame detector swap.
 
+## 0. Current Override - Week 1 Spec Is Authoritative
+
+This replaces the old phase-number ordering for the current work.
+
+Read these two files this way:
+
+```text
+score_miner_project/game_changer_playbook.md
+  context only; do not execute the deferred modular refactor / 30-60-90 roadmap now
+
+score_miner_project/implementation_spec_week1.md
+  authoritative next implementation list
+```
+
+The other-agent correction is accepted:
+
+- Do not start Phase 13 pitch keypoints for the current `PlayerDetect_v1@1.0` element. The active manifest weights are `iou`, `count`, `palette`, `smoothness`, and `role`; `keypoints_iou` is not weighted right now.
+- Do not start Phase 5 detector head-to-head yet. RF-DETR-L vs DEIMv2-L vs D-FINE-L is still important, but only after the current RF-DETR-M baseline is bug-fixed and measured.
+- Do not treat bootstrap pseudo-GT as an honest score. It is useful for visual audit only.
+- The correct status is: Phase 4 replay/schema/local endpoint tooling is working; the SAM3 scoring oracle is not done yet.
+
+Current highest-leverage order:
+
+```text
+1. Task 1: fix BGR/RGB image handling and prove it with review frames. [CODE DONE]
+2. Task 2: make ball_cls_id and runtime toggles explicit from env/config.
+3. Task 3: fix team carry-forward / null-team smoothness leak without abusing cluster_id. [CODE DONE]
+4. Task 4: add live manifest validation so class order and pillar weights cannot drift silently.
+5. Task 6: run a measured real Chutes deploy/baseline when credentials/funds allow.
+6. Task 7: add local SAM3 PGT scaffold for an honest local scoring oracle.
+```
+
+Implementation note for Task 1:
+
+```text
+Chutes frames are OpenCV BGR; runtime default SCORE_MINER_INPUT_COLOR_SPACE is "bgr".
+Local benchmark uses supervision frames; run_local defaults --input-color-space rgb.
+Detector, team color, and role cleanup receive RGB internally.
+```
+
+After Week 1, choose the next phase by score-per-day against the best available validator_sim/SAM3 oracle, not by old phase number.
+
 ## 1. Decision
 
 Use this stack:
@@ -20,7 +62,7 @@ RF-DETR-M smoke test
 + temporal association / occlusion memory / smoothing
 + ball-specific high-resolution pass
 + team/role temporal memory, ReID, and optional jersey-number evidence
-+ pitch keypoints now, TrackLab/TVCalib/SegFormer/AuxFlow-style homography next
++ pitch keypoints only if the active element weights keypoints_iou or pitch calibration
 + score-aware confidence + uncertainty calibration
 + FiftyOne light offline review
 + one experiment tracker: MLflow local-first or W&B sweeps
@@ -977,6 +1019,55 @@ memory snapshot
 
 The first version must call TurboVision's local scoring utilities where possible. Do not rewrite scoring logic by hand if the repo already exposes it.
 
+Status on 2026-05-21:
+
+```text
+DONE for local non-private development.
+```
+
+Implemented:
+
+```text
+endpoint replay runner
+prediction summary
+schema checker
+review-frame exporter
+PGT bootstrap helper
+PGT audit helper
+threshold sweep helper
+TurboVision score_runner wrapper
+optional private GT client wrapper
+```
+
+Latest accepted replay:
+
+```text
+runs/replays/rfdetr_m_t075_team_tracking_role_guard_v1
+success=true
+schema_check.valid=true
+frames_returned=750
+boxes_total=6231
+team_id 1/2 present
+valid_keypoints_total=0
+```
+
+Honest scoring status:
+
+```text
+Not complete yet.
+Week 1 Task 7 should add local SAM3 PGT scaffolding so this becomes a real scoring oracle.
+Do not treat bootstrap PGT score as a real score.
+```
+
+Week 1 override:
+
+```text
+Before Phase 5 detector race or Phase 13 keypoints, execute implementation_spec_week1.md.
+Order: Task 1 BGR/RGB, Task 2 ball_cls_id/env toggles, Task 3 team carry-forward leak, Task 4 manifest validator, Task 6 measured deploy, Task 7 SAM3 scaffold.
+Do not build keypoints for PlayerDetect unless the active manifest includes keypoints_iou.
+Do not race detectors before the baseline is bug-fixed.
+```
+
 ### Step 6 - Detector head-to-head
 
 Before building around one detector, benchmark:
@@ -1147,21 +1238,65 @@ rain/snow/shadow
 
 ### Step 13 - Add team/role logic
 
-Implement in `miner.py` first:
+Implement in miner runtime first, then upgrade with tracking/ReID:
 
 ```text
 player upper-body crop
 grass mask removal
-HSV/Lab color feature
-two-centroid team clustering
-temporal centroid matching
+Lab color feature
+OpenCV k-means two-centroid team clustering
 team_id 1/2 output
+keep cluster_id null until real tracking exists
+temporal centroid matching
 referee/goalkeeper high-confidence cleanup
 optional ReID embedding support
 optional jersey-number evidence for stable tracklets
 ```
 
 This is a high-value improvement because TurboVision has `palette` and `role` pillars.
+
+Current implemented baseline:
+
+```text
+score_miner_core/runtime/team_color.py
+SCORE_MINER_TEAM_COLOR_ENABLED=true
+SCORE_MINER_TEAM_MIN_PLAYERS=4
+SCORE_MINER_TEAM_TORSO_TOP_RATIO=0.15
+SCORE_MINER_TEAM_TORSO_BOTTOM_RATIO=0.65
+SCORE_MINER_TEAM_TORSO_CENTER_WIDTH_RATIO=0.70
+SCORE_MINER_TEAM_EXCLUDE_GRASS=true
+SCORE_MINER_TEAM_KMEANS_ATTEMPTS=3
+```
+
+Why this exact baseline:
+
+```text
+- TurboVision normalizes team_id 1/2 to TEAM1/TEAM2.
+- The palette scorer tests both TEAM1/TEAM2 orientations, so absolute left/right naming is not critical.
+- cluster_id is left null because smoothness groups by label + cluster_id; fake unstable identity IDs can hurt before tracking exists.
+- OpenCV Lab/k-means is enough for the first runtime palette signal and is cheap compared with ReID/OCR.
+```
+
+Current implemented role-cleanup baseline:
+
+```text
+score_miner_core/runtime/role_cleanup.py
+SCORE_MINER_ROLE_CLEANUP_ENABLED=true
+SCORE_MINER_REFEREE_CLS_ID unset by default
+SCORE_MINER_REFEREE_MIN_CONFIDENCE=0.85
+SCORE_MINER_REFEREE_MIN_TEAM_DISTANCE=35
+SCORE_MINER_REFEREE_MARGIN=8
+SCORE_MINER_REFEREE_MAX_PER_FRAME=2
+```
+
+Why it is guarded:
+
+```text
+- TurboVision maps cls_id by active manifest object order.
+- Local fixtures show object order may be ball, goalkeeper, player, referee, while the current smoke uses player_cls_id=0.
+- A wrong referee cls_id can hurt role/count more than it helps.
+- Therefore the module is deploy-ready but no-op until SCORE_MINER_REFEREE_CLS_ID is explicitly set after manifest inspection.
+```
 
 ### Step 14 - Add VideoState and scene analyzer
 
@@ -1175,6 +1310,36 @@ team color memory
 ball state
 homography state
 confidence history
+```
+
+Current implemented tracking baseline before full VideoState:
+
+```text
+score_miner_core/runtime/tracking.py
+Supervision ByteTrack update_with_detections
+SCORE_MINER_TRACKING_ENABLED=true
+SCORE_MINER_TRACK_ACTIVATION_THRESHOLD=0.25
+SCORE_MINER_LOST_TRACK_BUFFER=30
+SCORE_MINER_MINIMUM_MATCHING_THRESHOLD=0.8
+SCORE_MINER_TRACK_ASSIGNMENT_IOU=0.5
+SCORE_MINER_TRACK_FRAME_RATE=25.0
+```
+
+Important schema decision:
+
+```text
+- Do not emit ByteTrack IDs as cluster_id.
+- TurboVision currently parses cluster_id/team_id as team color, not identity.
+- ByteTrack IDs are internal only and are used to stabilize team_id through track memory.
+- The tracker wrapper preserves all original detector boxes and only copies tracker_id back by IoU, so tracking cannot silently drop detector output.
+```
+
+Upgrade path:
+
+```text
+- Supervision 0.28 ByteTrack works for the current pinned Chutes image but is deprecated for future Supervision 0.30.
+- When dependency changes are safe, test Roboflow's standalone Trackers package as the successor.
+- Add BoT-SORT/ReID only after validator replay proves ByteTrack team memory is insufficient.
 ```
 
 Start simple but keep the structure. Even simple state beats stateless frame output.
@@ -1483,16 +1648,17 @@ Do not:
 3. Add class mapping guard and memory budget.
 4. Build local benchmark.
 5. Deploy RF-DETR-M smoke test.
-6. Build validator_sim using TurboVision scoring utilities.
-7. Run RF-DETR-L vs DEIMv2-L vs D-FINE-L head-to-head.
-8. Build replay mining.
-9. Add optimizer_core with Optuna.
-10. Clone/read sn-gamestate and TrackLab; document usable modules.
+6. Build validator_sim/replay harness using TurboVision scoring utilities. [DONE locally; honest score blocked by missing GT]
+7. Execute implementation_spec_week1.md silent-bug fixes and SAM3 scaffold.
+8. Run RF-DETR-L vs DEIMv2-L vs D-FINE-L head-to-head only after silent-bug fixes.
+9. Build replay mining.
+10. Add optimizer_core with Optuna.
+11. Clone/read sn-gamestate and TrackLab; document usable modules.
 11. Add TrackLab-inspired adapter pieces only where they fit memory/latency.
 12. Add FiftyOne light dataset review and hard-negative mining.
 13. Add exactly one experiment tracker: MLflow local-first or W&B sweeps.
 14. Keep Twelve Labs optional only if SoccerNet/replay mining lacks rare chunks.
-15. Add team_id / role cleanup with ReID and optional jersey evidence.
+15. Add runtime team_id color clustering, then role cleanup with ReID and optional jersey evidence.
 16. Add VideoState and scene analyzer.
 17. Add adaptive scheduler.
 18. Add ball refiner.

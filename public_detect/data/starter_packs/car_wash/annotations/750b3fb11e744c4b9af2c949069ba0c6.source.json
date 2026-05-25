@@ -1,0 +1,109 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        448,
+        162,
+        606,
+        485
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        346,
+        170,
+        482,
+        388
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        612.6816283924843,
+        240.14066144369355,
+        838.7614822546973,
+        362.9079002452007
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        603,
+        412,
+        1008,
+        766
+      ],
+      "class": "drainage gate",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "drainage gate"
+    },
+    {
+      "bbox": [
+        536.5579331941545,
+        414.52819807427795,
+        940.5579331941545,
+        766.528198074278
+      ],
+      "class": "track",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "track"
+    },
+    {
+      "bbox": [
+        779.7426931106472,
+        157.02410142934033,
+        928.5641962421712,
+        313.9218946235273
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    }
+  ],
+  "frame_idx": 146,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/e973c635-44ee-4967-9cda-f8d048faacf4/versions/d91f6b6b-8b51-420e-bf98-cded0f356efd/frames/000146.png",
+  "scenario_spec": null
+}

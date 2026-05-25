@@ -1,0 +1,265 @@
+{
+  "annotations": [
+    {
+      "bbox": [
+        499,
+        410,
+        1311,
+        765
+      ],
+      "class": "track",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "track"
+    },
+    {
+      "bbox": [
+        378.78235908141966,
+        186.3620596854255,
+        569.089248434238,
+        263.42730697924765
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        315.34864300626305,
+        263.74307756713114,
+        416.9953027139875,
+        466.1635069672866
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        573.3032359081419,
+        241.96638957000178,
+        665.3851774530272,
+        414.31397643681595
+      ],
+      "class": "broom",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "broom"
+    },
+    {
+      "bbox": [
+        631.8225469728601,
+        628.1308534178578,
+        657.7724425887266,
+        650.0338496501405
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        632.5172233820459,
+        494.7378745290353,
+        656.767745302714,
+        514.0458106572573
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        484.9185803757829,
+        504.9860654267089,
+        504.76565762004174,
+        520.7229232701393
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        843.7907098121086,
+        274.3874170205131,
+        861.0083507306889,
+        301.12457388912145
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1036.6466597077244,
+        297.19179474911783,
+        1055.5636743215032,
+        315.99449793672625
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1040.143006263048,
+        539.456731056755,
+        1059.570981210856,
+        559.4249147778243
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        709,
+        348,
+        728,
+        367
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        777,
+        267,
+        791,
+        282
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        636,
+        731,
+        659,
+        746
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        968,
+        259,
+        977,
+        282
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        523,
+        291,
+        542,
+        306
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        494,
+        600,
+        512,
+        611
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1056,
+        467,
+        1070,
+        479
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "none",
+      "prompt_text": "nozzle"
+    },
+    {
+      "bbox": [
+        1062.028183716075,
+        371.08785359727284,
+        1078.7118997912316,
+        387.81221218826624
+      ],
+      "class": "nozzle",
+      "exemplar_enabled": true,
+      "exemplar_label": 1,
+      "exemplar_mode": "explicit",
+      "prompt_text": "nozzle"
+    }
+  ],
+  "frame_idx": 92,
+  "frame_meta_key": null,
+  "generation": {
+    "bytes_before_optimize": null,
+    "bytes_uploaded": null,
+    "dedupe_retries": null,
+    "duplicate_reference_frame": null,
+    "duplicate_similarity": null,
+    "fallback_prompt_used": null,
+    "generation_model_name": null,
+    "generation_model_provider": null,
+    "generation_model_revision": null,
+    "generation_params": null,
+    "image_format": null,
+    "prompt_compacted": null,
+    "prompt_compacted_scenario": null,
+    "prompt_object_classes": null,
+    "prompt_source": null,
+    "prompt_structured_reference": null,
+    "prompt_text": null,
+    "prompt_text_full": null,
+    "prompt_text_scenario": null,
+    "prompt_variant_id": null,
+    "seed": null
+  },
+  "image_key": "synthetic-datasets/e973c635-44ee-4967-9cda-f8d048faacf4/versions/d91f6b6b-8b51-420e-bf98-cded0f356efd/frames/000092.png",
+  "scenario_spec": null
+}
