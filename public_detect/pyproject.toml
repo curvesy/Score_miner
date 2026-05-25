@@ -9,8 +9,8 @@ dependencies = [
     "opencv-python-headless>=4.10",
     "pillow>=11.0",
     "pyyaml>=6.0",
-    "torch>=2.10",
-    "torchvision>=0.25",
+    "torch>=2.11,<2.12",
+    "torchvision>=0.26,<0.27",
     "ultralytics>=8.4.14",
 ]
 

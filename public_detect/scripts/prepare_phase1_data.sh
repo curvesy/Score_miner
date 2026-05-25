@@ -11,6 +11,8 @@ if ! command -v uv >/dev/null 2>&1; then
   exit 1
 fi
 
+export UV_TORCH_BACKEND="${UV_TORCH_BACKEND:-cu128}"
+
 echo "Preparing Score starter data for Car-wash and Beverage..."
 
 uv run python scripts/download_starter_pack.py \
@@ -45,4 +47,3 @@ echo
 echo "Data ready:"
 echo "  data/yolo/car_wash_starter/data.yaml"
 echo "  data/yolo/beverage_starter/data.yaml"
-

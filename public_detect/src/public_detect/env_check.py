@@ -48,7 +48,7 @@ def check_environment(require_cuda: bool = True) -> dict[str, Any]:
         "nvidia_smi": _run(
             [
                 "nvidia-smi",
-                "--query-gpu=name,memory.used,memory.total,driver_version,cuda_version",
+                "--query-gpu=name,memory.used,memory.total,driver_version",
                 "--format=csv,noheader",
             ]
         ),
@@ -76,4 +76,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

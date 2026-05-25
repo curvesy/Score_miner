@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 export PATH="$HOME/.local/bin:$PATH"
-export UV_TORCH_BACKEND="${UV_TORCH_BACKEND:-auto}"
+export UV_TORCH_BACKEND="${UV_TORCH_BACKEND:-cu128}"
 
 if ! command -v uv >/dev/null 2>&1; then
   echo "uv is required. Run:"

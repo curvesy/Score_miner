@@ -44,8 +44,8 @@ The setup script uses:
 ```text
 uv project environment
 Python 3.12
-UV_TORCH_BACKEND=auto
-official PyTorch CUDA wheel selection
+UV_TORCH_BACKEND=cu128 by default
+official PyTorch CUDA 12.8 wheel selection
 latest compatible Ultralytics from the lock/solve
 CUDA + YOLO weight availability check before training
 ```
@@ -53,8 +53,8 @@ CUDA + YOLO weight availability check before training
 Current lock, resolved 2026-05-25:
 
 ```text
-torch 2.12.0
-torchvision 0.27.0
+torch 2.11.x
+torchvision 0.26.x
 ultralytics 8.4.54
 ```
 

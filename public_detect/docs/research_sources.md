@@ -225,10 +225,11 @@ Updated project lock, resolved 2026-05-25:
 
 ```text
 Python 3.12 target
-torch 2.12.0
-torchvision 0.27.0
+torch 2.11.x
+torchvision 0.26.x
 ultralytics 8.4.54
 torchaudio omitted because public Detect does not need audio
+CUDA 12.8 backend is the default because rented GPU drivers may not support CUDA 13 wheels yet
 ```
 
 ## 2026-05-25 Winning-Loop Research Update

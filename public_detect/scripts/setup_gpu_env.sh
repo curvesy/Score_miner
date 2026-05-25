@@ -13,7 +13,7 @@ if ! command -v uv >/dev/null 2>&1; then
   exit 1
 fi
 
-export UV_TORCH_BACKEND="${UV_TORCH_BACKEND:-auto}"
+export UV_TORCH_BACKEND="${UV_TORCH_BACKEND:-cu128}"
 
 uv venv --clear --python "${PYTHON_VERSION:-3.12}"
 uv sync --all-extras
