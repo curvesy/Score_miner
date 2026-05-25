@@ -165,6 +165,84 @@ public Detect because false positives matter. The winning loop is:
 For winning, Phase 3 and Phase 4 are not optional. A fast baseline deploy can
 skip them, but a top-3 attempt should not.
 
+## Current Phase 3 State
+
+Phase 3 now has a local Score-style threshold sweep:
+
+```bash
+PYTHONPATH=src python3 scripts/score_threshold_sweep.py \
+  --model runs/car_wash/yolo11n_starter/weights/best.pt \
+  --data data/yolo/car_wash_starter/data.yaml \
+  --name car_wash_yolo11n_starter \
+  --per-class
+```
+
+Outputs:
+
+```text
+reports/score_sweeps/<name>/raw_predictions.json
+reports/score_sweeps/<name>/sweep.csv
+reports/score_sweeps/<name>/summary.json
+reports/score_sweeps/<name>/diagnostics.json
+```
+
+Current starter-pack reads:
+
+```text
+Car-wash YOLO11n:
+  best local Score-style setting:
+    max_det 20
+    broom 0.2, drainage gate 0.1, nozzle 0.1, track 0.1
+  score 0.7464, map50 0.6154, fp_score 0.9429, precision 0.8947
+  bottleneck: nozzle recall, not false positives
+
+Beverage YOLO11n:
+  best local Score-style setting:
+    max_det 50
+    cup 0.4, bottle 0.1, can 0.1
+  score 0.4880, map50 0.2610, fp_score 0.8286, precision 0.7857
+  bottleneck: bottle class is not learned well enough
+```
+
+Interpretation:
+
+```text
+Car-wash is the lead deploy candidate after Phase 4 nozzle-focused data.
+Beverage should not be deployed from the starter-only baseline.
+```
+
+## Current Phase 4 State
+
+Failure-review exports exist for both starter runs:
+
+```text
+reports/failure_reviews/car_wash_yolo11n_starter/
+reports/failure_reviews/beverage_yolo11n_starter/
+```
+
+Open the `full/*.jpg` files to inspect whole-image failures, and the `crops/`
+folders to inspect individual missed objects or false positives. The next data
+work must come from these review artifacts.
+
+Approved-source ingestion now exists:
+
+```bash
+# Beverage COCO/TACO-style source
+PYTHONPATH=src python3 scripts/ingest_coco_source.py \
+  --config configs/data_sources/beverage_taco.yaml \
+  --coco-json /path/to/annotations.json \
+  --image-root /path/to/images_or_dataset_root \
+  --output-dir data/yolo_candidates/beverage_taco_v1
+
+# Car-wash local video frames
+PYTHONPATH=src python3 scripts/extract_video_frames.py \
+  --video /path/to/car_wash_video.mp4 \
+  --output-dir data/raw/car_wash_video_frames/<source_slug> \
+  --fps 0.5 \
+  --max-frames 500 \
+  --prefix <source_slug>
+```
+
 ## Folder Map
 
 ```text
@@ -174,6 +252,7 @@ public_detect/
   docs/
     research_sources.md
     score_rules.md
+    phase4_data_plan.md
   configs/
     elements/
     training/

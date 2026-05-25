@@ -1,0 +1,104 @@
+{
+  "base_conf": 0.001,
+  "best": {
+    "confidence": 0.1,
+    "fn": 29,
+    "fp": 4,
+    "fp_score": 0.9428571428571428,
+    "gt": 63,
+    "map50": 0.6153508771929824,
+    "max_det": 20,
+    "mode": "per_class",
+    "per_class_confidence": "{\"broom\": 0.2, \"drainage gate\": 0.1, \"nozzle\": 0.1, \"track\": 0.1}",
+    "precision": 0.8947368421052632,
+    "predictions": 38,
+    "recall": 0.5396825396825397,
+    "score": 0.7463533834586467,
+    "tp": 34
+  },
+  "class_names": {
+    "0": "broom",
+    "1": "drainage gate",
+    "2": "nozzle",
+    "3": "track"
+  },
+  "data": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/car_wash_starter/data.yaml",
+  "diagnostics": {
+    "false_positives": 4,
+    "misses": 29
+  },
+  "imgsz": 960,
+  "iou": 0.7,
+  "metrics": {
+    "classes": [
+      {
+        "ap50": 0.8947368421052632,
+        "cls": 0,
+        "fn": 2,
+        "fp": 2,
+        "fp_score": 0.9714285714285714,
+        "gt": 20,
+        "name": "broom",
+        "precision": 0.9,
+        "predictions": 20,
+        "recall": 0.9,
+        "score": 0.9254135338345865,
+        "tp": 18
+      },
+      {
+        "ap50": 0.5,
+        "cls": 1,
+        "fn": 4,
+        "fp": 1,
+        "fp_score": 0.9857142857142858,
+        "gt": 8,
+        "name": "drainage gate",
+        "precision": 0.8,
+        "predictions": 5,
+        "recall": 0.5,
+        "score": 0.6942857142857144,
+        "tp": 4
+      },
+      {
+        "ap50": 0.26666666666666666,
+        "cls": 2,
+        "fn": 22,
+        "fp": 1,
+        "fp_score": 0.9857142857142858,
+        "gt": 30,
+        "name": "nozzle",
+        "precision": 0.8888888888888888,
+        "predictions": 9,
+        "recall": 0.26666666666666666,
+        "score": 0.5542857142857144,
+        "tp": 8
+      },
+      {
+        "ap50": 0.8,
+        "cls": 3,
+        "fn": 1,
+        "fp": 0,
+        "fp_score": 1.0,
+        "gt": 5,
+        "name": "track",
+        "precision": 1.0,
+        "predictions": 4,
+        "recall": 0.8,
+        "score": 0.88,
+        "tp": 4
+      }
+    ],
+    "fn": 29,
+    "fp": 4,
+    "fp_score": 0.9428571428571428,
+    "gt": 63,
+    "map50": 0.6153508771929824,
+    "precision": 0.8947368421052632,
+    "predictions": 38,
+    "recall": 0.5396825396825397,
+    "score": 0.7463533834586467,
+    "tp": 34
+  },
+  "model": "/home/sina/projects/validator_improve/score_miner_project/public_detect/runs/car_wash/yolo11n_starter/weights/best.pt",
+  "raw_predictions": 2100
+}

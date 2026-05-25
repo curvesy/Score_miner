@@ -115,6 +115,54 @@ Reason:
 High recall with many junk boxes can look good in normal training metrics but lose on SN44 because false positives are part of the public Detect score.
 ```
 
+## Local Phase 3 Scorer
+
+The local scorer is implemented in:
+
+```text
+src/public_detect/score_eval.py
+scripts/score_threshold_sweep.py
+```
+
+It does:
+
+```text
+1. Run YOLO prediction once at low confidence.
+2. Cache raw detections.
+3. Sweep global thresholds.
+4. Sweep per-class thresholds.
+5. Sweep max_det values.
+6. Score by local approximation:
+   0.6 * AP50 + 0.4 * false-positive score
+7. Save missed boxes and false positives for Phase 4 data planning.
+```
+
+This is not the private validator. It is the local decision instrument for
+choosing checkpoints and thresholds before deployment.
+
+Current best starter-pack threshold configs:
+
+```text
+Car-wash:
+  checkpoint: runs/car_wash/yolo11n_starter/weights/best.pt
+  max_det: 20
+  thresholds:
+    broom: 0.5
+    drainage gate: 0.1
+    nozzle: 0.1
+    track: 0.1
+
+Beverage:
+  checkpoint: runs/beverage/yolo11n_starter/weights/best.pt
+  max_det: 50
+  thresholds:
+    cup: 0.2
+    bottle: 0.1
+    can: 0.1
+```
+
+Use these as starting points only. They must be re-swept after Phase 4 data.
+
 ## Required Preflight
 
 Before choosing an element or deploying a new model:

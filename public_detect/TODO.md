@@ -24,9 +24,9 @@ Each implementation task starts with a research checkpoint. Do not add code for 
 - [x] Add training config for YOLO26s.
 - [x] Add YOLOv8n control config for pipeline debugging.
 - [x] Add baseline training runner and one-epoch CUDA smoke test.
-- [ ] Run Car-wash YOLO11n/YOLO26n baseline.
-- [ ] Run Beverage YOLO11n/YOLO26n baseline.
-- [ ] Log every run with config, data manifest, metrics, and artifact path.
+- [x] Run Car-wash YOLO11n/YOLO26n baseline.
+- [x] Run Beverage YOLO11n/YOLO26n baseline.
+- [x] Log copied run artifacts under `runs/`.
 
 ## Phase 2 - Export And Size Gate
 
@@ -43,20 +43,46 @@ Each implementation task starts with a research checkpoint. Do not add code for 
 - [ ] Research current public scoring fields in Score result shards.
 - [ ] Implement proof/latest challenge frame collector.
 - [ ] Implement competitor prediction collector from console/result shards where accessible.
-- [ ] Implement local approximation of map50 + false-positive composite. Do not skip this; it is the validator-style instrument for picking a winner.
-- [ ] Implement confidence threshold sweep.
-- [ ] Implement per-class threshold sweep.
+- [x] Implement local approximation of map50 + false-positive composite. Do not skip this; it is the validator-style instrument for picking a winner.
+- [x] Implement confidence threshold sweep.
+- [x] Implement per-class threshold sweep.
 - [ ] Implement max-det and image-size sweep.
 - [ ] Add Optuna config-only search for thresholds/imgsz/max-det/SAHI settings after brute-force sweep works.
-- [ ] Generate score reports for Car-wash and Beverage.
+- [x] Generate score reports for Car-wash and Beverage.
+- [x] Generate diagnostics for false positives and missed ground-truth boxes.
 - [ ] Define no-overfit gate: best config must improve starter/proof validation and not only synthetic validation.
+
+Current Phase 3 result:
+
+```text
+Car-wash YOLO11n is the lead candidate:
+  score 0.7464, fp_score 0.9429, precision 0.8947, recall 0.5397
+  problem class: nozzle, 8 TP / 1 FP / 22 FN
+
+Beverage YOLO11n is not ready:
+  score 0.4880, fp_score 0.8286, precision 0.7857, recall 0.3826
+  problem class: bottle, 0 TP / 0 FP / 20 FN
+```
+
+Next implementation should start Phase 4 from these diagnostics, not random data volume.
 
 ## Phase 4 - Data Advantage
 
 - [ ] Research modern synthetic-to-real object detection practices for small datasets.
 - [ ] Research current SAM3/GroundingDINO/Supervision pseudo-label path for offline labeling only.
 - [ ] Research current FiftyOne/CVAT workflow for manual review and hard-negative correction.
+- [x] Write Phase 4 source-priority and data-plan doc for Car-wash and Beverage.
 - [ ] Use Phase 3 failures to define the data plan before generating data.
+- [x] Build failure-review exporter from `diagnostics.json`.
+- [x] Export Car-wash and Beverage failure review artifacts.
+- [ ] Review Car-wash missed nozzles/drainage gates and false positives.
+- [ ] Review Beverage missed bottles/cups and can false positives.
+- [x] Build Phase 4 source manifest for approved outside data candidates.
+- [x] Implement/choose ingestion path for approved sources only.
+- [x] Add Beverage COCO/TACO ingest config and script.
+- [x] Add Car-wash local video frame extraction script.
+- [ ] Download or mount approved Beverage source data, then run COCO ingestion.
+- [ ] Collect approved Car-wash videos, then run frame extraction.
 - [ ] Build diverse synthetic generation recipe for Beverage.
 - [ ] Build diverse synthetic generation recipe for Car-wash.
 - [ ] Build teacher-assisted pseudo-label queue for unlabeled Score-style/proof/public images.

@@ -1,0 +1,26 @@
+{
+  "by_class": {
+    "broom": {
+      "false_positive": 2,
+      "miss": 2
+    },
+    "drainage gate": {
+      "false_positive": 1,
+      "miss": 4
+    },
+    "nozzle": {
+      "false_positive": 1,
+      "miss": 22
+    },
+    "track": {
+      "false_positive": 0,
+      "miss": 1
+    }
+  },
+  "display_predictions": 38,
+  "false_positives": 4,
+  "images": 7,
+  "misses": 29,
+  "output_dir": "/home/sina/projects/validator_improve/score_miner_project/public_detect/reports/failure_reviews/car_wash_yolo11n_starter",
+  "review_items": 33
+}

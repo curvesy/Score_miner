@@ -1,0 +1,22 @@
+{
+  "by_class": {
+    "bottle": {
+      "false_positive": 0,
+      "miss": 20
+    },
+    "can": {
+      "false_positive": 12,
+      "miss": 16
+    },
+    "cup": {
+      "false_positive": 0,
+      "miss": 35
+    }
+  },
+  "display_predictions": 56,
+  "false_positives": 12,
+  "images": 7,
+  "misses": 71,
+  "output_dir": "/home/sina/projects/validator_improve/score_miner_project/public_detect/reports/failure_reviews/beverage_yolo11n_starter",
+  "review_items": 83
+}

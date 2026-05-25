@@ -1,0 +1,33 @@
+source_id: beverage_taco_contextual_v1
+source_type: taco_contextual_trash
+element_config: configs/elements/beverage.yaml
+review_status: needs_review
+license_note: "Check upstream TACO license and attribution before using in a released artifact."
+class_map:
+  cup:
+    - disposable plastic cup
+    - paper cup
+    - foam cup
+    - cup
+  bottle:
+    - clear plastic bottle
+    - other plastic bottle
+    - plastic bottle
+    - glass bottle
+    - bottle
+  can:
+    - drink can
+    - aluminium can
+    - aluminum can
+    - tin can
+hard_negative_categories:
+  - jar
+  - drink carton
+  - other carton
+  - disposable food container
+  - plastic lid
+  - food can
+filters:
+  include_images_with_mapped_labels: true
+  include_hard_negative_only_images: true
+  max_images: null

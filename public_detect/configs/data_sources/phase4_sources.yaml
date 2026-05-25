@@ -1,0 +1,137 @@
+version: 1
+date_checked: "2026-05-26"
+rule: >
+  Candidate sources are not automatically trusted. Include only data that visually
+  matches Score starter/proof frames or improves Phase 3 Score-style validation.
+
+elements:
+  car_wash:
+    element_id: manak0/Detect-car-wash
+    current_priority: 1
+    first_target: nozzle_recall
+    second_target: drainage_gate_recall
+    accepted_source_types:
+      - score_starter_or_proof
+      - car_wash_video_frames
+      - teacher_labeled_car_wash_frames_reviewed
+      - score_style_synthetic_reviewed
+      - small_generic_filler_only_if_score_improves
+    reject_patterns:
+      - road drains that do not look like wet car-wash floor drains
+      - washing machines
+      - metal bolt washers
+      - product-only nozzle photos as primary data
+      - train tracks or road lane tracks
+    class_queries:
+      broom:
+        positive:
+          - "push broom in car wash bay"
+          - "car wash bay brush broom wet floor"
+        hard_negative:
+          - "car wash brush machine not handheld broom"
+      drainage gate:
+        positive:
+          - "car wash trench drain grate wet floor"
+          - "self service car wash bay floor drain grate"
+        hard_negative:
+          - "floor seam wet concrete"
+          - "metal rail wet floor"
+      nozzle:
+        positive:
+          - "car wash spray nozzle wall jet"
+          - "car wash tunnel small spray jets"
+          - "self service wash bay nozzle in scene"
+        hard_negative:
+          - "hose without nozzle"
+          - "pipe fitting wet wall"
+      track:
+        positive:
+          - "car wash conveyor floor track"
+          - "car wash guide rail floor"
+        hard_negative:
+          - "wet floor seam"
+          - "hose on floor"
+          - "wall stripe"
+
+  beverage:
+    element_id: manak0/Detect-beverage-detect
+    current_priority: 2
+    first_target: bottle_recall
+    second_target: cup_recall_and_can_fp
+    accepted_source_types:
+      - score_starter_or_proof
+      - taco_contextual_trash
+      - roboflow_beverage_container_contextual
+      - roboflow_litter_or_recycling_contextual
+      - teacher_labeled_crowded_drink_scenes_reviewed
+    reject_patterns:
+      - clean product catalog photos as primary data
+      - white background bottles/cans/cups
+      - single centered object studio shots
+      - cartoons or rendered products
+    public_candidates:
+      - name: TACO Trash Annotations in Context
+        url: https://github.com/pedropro/TACO
+        use: real contextual cup/bottle/can positives plus hard negatives
+        class_map:
+          cup:
+            - disposable plastic cup
+            - paper cup
+            - foam cup
+          bottle:
+            - clear plastic bottle
+            - other plastic bottle
+            - glass bottle
+          can:
+            - drink can
+      - name: Roboflow Beverage Containers
+        url: https://universe.roboflow.com/roboflow-universe-projects/beverage-containers-3atxb
+        use: candidate positives after visual filtering
+        class_map:
+          cup:
+            - cup-disposable
+            - cup-handle
+          bottle:
+            - bottle-glass
+            - bottle-plastic
+            - gym bottle
+          can:
+            - tin can
+    class_queries:
+      cup:
+        positive:
+          - "crowded bar disposable cup"
+          - "person holding plastic cup crowd"
+          - "paper cup in crowded scene"
+        hard_negative:
+          - "bowl"
+          - "hat"
+          - "round label"
+      bottle:
+        positive:
+          - "plastic bottle in crowd"
+          - "glass bottle in bar crowd"
+          - "handheld drink bottle"
+        hard_negative:
+          - "jar"
+          - "carton"
+          - "thermos not beverage bottle"
+      can:
+        positive:
+          - "drink can in crowd"
+          - "aluminum can handheld"
+        hard_negative:
+          - "cylindrical trash bin"
+          - "poster label circle"
+          - "food container"
+
+review_gates:
+  before_training:
+    - source has license/source URL recorded
+    - class mapping reviewed
+    - at least 25 random labels visually checked per source, or all labels if source is small
+    - obvious wrong-domain images removed
+  after_training:
+    - rerun Phase 3 on Score starter/proof validation
+    - keep source only if Score-style metric improves or fixes a class bottleneck without large false-positive damage
+    - remove source if it improves source mAP but hurts Score-style validation

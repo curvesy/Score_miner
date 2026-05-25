@@ -1,0 +1,28 @@
+source_id: beverage_roboflow_containers_v1
+source_type: roboflow_beverage_container_contextual
+element_config: configs/elements/beverage.yaml
+review_status: needs_review
+license_note: "Check upstream Roboflow Universe license and export terms before use."
+class_map:
+  cup:
+    - cup-disposable
+    - cup-handle
+    - disposable cup
+    - paper cup
+  bottle:
+    - bottle-glass
+    - bottle-plastic
+    - gym bottle
+    - plastic bottle
+    - glass bottle
+  can:
+    - tin can
+    - drink can
+hard_negative_categories:
+  - glass-mug
+  - glass-normal
+  - glass-wine
+filters:
+  include_images_with_mapped_labels: true
+  include_hard_negative_only_images: true
+  max_images: null

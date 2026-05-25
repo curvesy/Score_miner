@@ -160,6 +160,156 @@ Optuna 4.x supports black-box optimization. Use it after brute-force sweeps to t
 - [ ] Current RT-DETR tiny export size and ONNX compatibility.
 - [ ] Current Ultralytics embedded-NMS / end-to-end export behavior for YOLO11 and YOLO26.
 
+## 2026-05-26 Phase 3 Scoring Research
+
+### Ultralytics Predict Results
+
+Source: https://docs.ultralytics.com/modes/predict/
+
+Why it matters:
+
+```text
+Ultralytics predict mode returns Results objects with Boxes fields including
+xyxy coordinates, confidence scores, and class IDs. Phase 3 should use these
+Python objects directly and cache raw detections, instead of parsing CLI logs.
+```
+
+### Ultralytics Validation Arguments
+
+Source: https://docs.ultralytics.com/modes/val/
+
+Source: https://docs.ultralytics.com/usage/cfg/
+
+Why it matters:
+
+```text
+Ultralytics validation defaults use low confidence, configurable NMS IoU, and
+max_det. Our local sweep follows the same principle: run low-confidence
+prediction once, then tune confidence/max_det against the Score-style metric.
+```
+
+### COCO/VOC-Style AP50
+
+Source: https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py
+
+Why it matters:
+
+```text
+AP is computed from precision-recall behavior after confidence sorting and IoU
+matching. For SN44 Phase 3 we only need a transparent AP50 approximation plus
+false-positive pressure, not a full COCO benchmark dependency.
+```
+
+## 2026-05-26 Phase 4 Data Source Research
+
+### Roboflow Universe Dataset Search
+
+Source: https://roboflow.com/universe
+
+Source: https://docs.roboflow.com/roboflow/roboflow-jp/universe/find-a-dataset-on-universe
+
+Why it matters:
+
+```text
+Roboflow Universe is useful for finding candidate object-detection datasets, but
+the search is semantic. Keyword matches such as "drain" or "washer" can return
+wrong-domain data. Candidate datasets must be visually filtered against Score
+starter/proof frames before training.
+```
+
+### Beverage Containers Candidate
+
+Source: https://universe.roboflow.com/roboflow-universe-projects/beverage-containers-3atxb
+
+Why it matters:
+
+```text
+This is a real beverage-container object-detection source with bottle/cup/can-like
+classes. It is a useful Beverage candidate if mapped carefully to Score classes
+and filtered for cluttered/context images over clean product shots.
+```
+
+### TACO Trash Annotations In Context
+
+Source: https://github.com/pedropro/TACO
+
+Source: https://datasetninja.com/taco
+
+Source: https://arxiv.org/abs/2003.06975
+
+Why it matters:
+
+```text
+TACO contains real contextual waste/litter images and classes such as clear
+plastic bottle, drink can, disposable plastic cup, glass bottle, paper cup, and
+cartons. It is a strong Beverage source and hard-negative source because it is
+messy/contextual, not product catalog data.
+```
+
+### GroundingDINO / Offline Teacher Labels
+
+Source: https://github.com/IDEA-Research/GroundingDINO
+
+Why it matters:
+
+```text
+GroundingDINO can propose boxes from text prompts for outside images and video
+frames. Use it offline only; teacher labels need manual review before training.
+```
+
+### Supervision
+
+Source: https://supervision.roboflow.com/
+
+Why it matters:
+
+```text
+Supervision provides practical converters and visualization tools for object
+detection data. Use it for review/export glue rather than hand-rolled one-off
+annotation formats where practical.
+```
+
+### FiftyOne / CVAT Review
+
+Source: https://docs.voxel51.com/user_guide/evaluation.html
+
+Source: https://docs.cvat.ai/docs/annotation/auto-annotation/automatic-annotation/
+
+Why it matters:
+
+```text
+FiftyOne and CVAT are useful when Phase 4 review volume grows. They can help
+inspect false positives, false negatives, and teacher labels. They should not
+replace manual review of high-value examples.
+```
+
+### COCO Detection Format
+
+Source: https://claru.ai/formats/coco-format
+
+Why it matters:
+
+```text
+TACO and many Roboflow exports use COCO-style detection annotations: images,
+annotations, categories, and bbox in [x, y, width, height]. Phase 4 ingestion
+maps those categories into Score's exact class order and writes YOLO labels.
+```
+
+### yt-dlp And FFmpeg For Video Sources
+
+Source: https://github.com/yt-dlp/yt-dlp
+
+Source: https://renderio.dev/blogs/ffmpeg-extract-frames
+
+Why it matters:
+
+```text
+Car-wash public labeled data is scarce. The practical source is real video
+frames from car-wash facilities. The project script uses ffmpeg for local frame
+extraction; web downloads should be handled separately with current yt-dlp and
+source/license recorded before labels are created.
+```
+
 ## 2026-05-25 Phase 1 Training Check
 
 ### uv Project Setup
