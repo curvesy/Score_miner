@@ -24,6 +24,7 @@ from public_detect.score_eval import (
     match_diagnostics,
     save_json,
 )
+from public_detect.sahi_inference import predict_sahi_ultralytics
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -81,6 +82,29 @@ def run_predictions(
                 )
             )
     return boxes
+
+
+def run_sahi_predictions(
+    model_path: Path,
+    data_yaml: Path,
+    base_conf: float,
+    device: str | None,
+    slice_height: int,
+    slice_width: int,
+    overlap: float,
+    postprocess_iou: float,
+) -> list[Box]:
+    image_paths, _ = load_yolo_dataset(data_yaml)
+    return predict_sahi_ultralytics(
+        model_path=model_path,
+        image_paths=image_paths,
+        confidence=base_conf,
+        device=device,
+        slice_height=slice_height,
+        slice_width=slice_width,
+        overlap=overlap,
+        postprocess_iou=postprocess_iou,
+    )
 
 
 def threshold_rows(
@@ -187,6 +211,12 @@ def main() -> None:
     parser.add_argument("--per-class-thresholds", default="0.10,0.20,0.30,0.40,0.50")
     parser.add_argument("--per-class-limit", default=5000, type=int)
     parser.add_argument("--reuse-predictions", action="store_true")
+    parser.add_argument("--prediction-mode", choices=["single", "sahi"], default="single")
+    parser.add_argument("--device", default=None)
+    parser.add_argument("--sahi-slice-height", default=640, type=int)
+    parser.add_argument("--sahi-slice-width", default=640, type=int)
+    parser.add_argument("--sahi-overlap", default=0.25, type=float)
+    parser.add_argument("--sahi-postprocess-iou", default=0.5, type=float)
     args = parser.parse_args()
 
     output_dir = args.output_dir / args.name
@@ -195,6 +225,18 @@ def main() -> None:
 
     if args.reuse_predictions and predictions_path.exists():
         predictions = boxes_from_json(predictions_path)
+    elif args.prediction_mode == "sahi":
+        predictions = run_sahi_predictions(
+            model_path=args.model,
+            data_yaml=args.data,
+            base_conf=args.base_conf,
+            device=args.device,
+            slice_height=args.sahi_slice_height,
+            slice_width=args.sahi_slice_width,
+            overlap=args.sahi_overlap,
+            postprocess_iou=args.sahi_postprocess_iou,
+        )
+        save_json(predictions_path, boxes_to_json(predictions))
     else:
         predictions = run_predictions(
             model_path=args.model,
@@ -251,6 +293,13 @@ def main() -> None:
             "imgsz": args.imgsz,
             "iou": args.iou,
             "base_conf": args.base_conf,
+            "prediction_mode": args.prediction_mode,
+            "sahi": {
+                "slice_height": args.sahi_slice_height,
+                "slice_width": args.sahi_slice_width,
+                "overlap": args.sahi_overlap,
+                "postprocess_iou": args.sahi_postprocess_iou,
+            } if args.prediction_mode == "sahi" else None,
             "raw_predictions": len(predictions),
             "best": best,
             "metrics": metrics.to_dict(),

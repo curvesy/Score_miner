@@ -25,6 +25,9 @@ tracking = [
 review = [
     "supervision>=0.27",
 ]
+inference = [
+    "sahi>=0.11.28",
+]
 
 [tool.uv]
 default-groups = ["dev"]
