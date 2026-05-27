@@ -315,6 +315,39 @@ PYTHONPATH=src uv run python scripts/score_threshold_sweep.py \
 Do not train on Manako predictions directly. First inspect the sheet, select
 Score-like frames, and manually correct labels.
 
+Export the smoke checkpoint and verify the 30MB deploy-size gate:
+
+```bash
+PYTHONPATH=src uv run python scripts/export_yolo_onnx.py \
+  --model runs/beverage/yolo11n_starter_local_smoke-2/weights/best.pt \
+  --output-dir artifacts/deploy_repos/beverage_local_smoke \
+  --imgsz 768
+
+PYTHONPATH=src uv run python scripts/check_repo_size.py \
+  artifacts/deploy_repos/beverage_local_smoke
+```
+
+Build a Score-compatible `miner.py` deploy repo and smoke-test it locally:
+
+```bash
+PYTHONPATH=src uv run python scripts/build_deploy_repo.py \
+  --weights artifacts/deploy_repos/beverage_local_smoke/weights.onnx \
+  --element-config configs/elements/beverage.yaml \
+  --output-dir artifacts/deploy_repos/beverage_local_smoke_miner \
+  --input-size 768 \
+  --conf 0.25 \
+  --max-det 20
+
+PYTHONPATH=src uv run python scripts/smoke_deploy_miner.py \
+  --repo artifacts/deploy_repos/beverage_local_smoke_miner \
+  --images data/yolo/beverage_starter/images/train \
+  --limit 2
+```
+
+For real deployment, the model filename inside the deploy repo is normalized to
+`weights.onnx`. Do not add training checkpoints, datasets, or reports to the
+deploy repo; the full repo revision must pass the 30MB gate.
+
 Open the `full/*.jpg` files to inspect whole-image failures, and the `crops/`
 folders to inspect individual missed objects or false positives. The next data
 work must come from these review artifacts.

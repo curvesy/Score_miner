@@ -43,6 +43,11 @@ def main() -> None:
         type=int,
         help="Maximum filtered refs to scan before stopping.",
     )
+    parser.add_argument(
+        "--min-score",
+        type=float,
+        help="Only follow response payloads from evaluations with at least this composite score.",
+    )
     parser.add_argument("--debug-index", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
@@ -56,6 +61,7 @@ def main() -> None:
         limit=args.limit,
         element_filters=tuple(args.element_filter),
         max_refs=args.max_refs,
+        min_score=args.min_score,
         verbose=not args.quiet,
     )
     print(json.dumps({"output_dir": str(args.output_dir), "frames": manifest["frames"]}, indent=2))

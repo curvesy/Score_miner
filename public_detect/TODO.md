@@ -32,10 +32,12 @@ Each implementation task starts with a research checkpoint. Do not add code for 
 
 - [ ] Research current Ultralytics ONNX export options and Chutes compatibility.
 - [ ] Research current TurboVision `sv deploy-os-miner` path and Chutes template expectations.
-- [ ] Implement local export script.
-- [ ] Implement full-repo size gate using the same semantics as the validator.
+- [x] Implement local export script.
+- [x] Implement full-repo size gate using conservative decimal MB semantics.
 - [ ] Package minimal HF repo layout.
 - [ ] Verify each model repo is <= 30MB.
+- [x] Add minimal ONNX Runtime deploy repo builder with `miner.py`.
+- [x] Add local deploy miner smoke loader.
 - [ ] Add dry-run deployment checklist: env vars present, HF revision recorded, no extra files in model repo.
 
 ## Phase 3 - Score-Style Validation

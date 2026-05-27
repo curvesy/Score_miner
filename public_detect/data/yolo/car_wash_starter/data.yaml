@@ -1,4 +1,4 @@
-path: score_miner_project/public_detect/data/yolo/car_wash_starter
+path: /home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/car_wash_starter
 train: images/train
 val: images/train
 nc: 4

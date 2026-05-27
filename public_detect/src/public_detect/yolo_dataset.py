@@ -104,7 +104,7 @@ def write_yolo_dataset(
     data_yaml.write_text(
         "\n".join(
             [
-                f"path: {target}",
+                f"path: {target.resolve()}",
                 "train: images/train",
                 "val: images/train",
                 f"nc: {len(spec.objects)}",
@@ -122,4 +122,3 @@ def _find_image(image_dir: Path, asset_id: str) -> Path:
     if not matches:
         raise FileNotFoundError(f"no image found for asset {asset_id} in {image_dir}")
     return matches[0]
-

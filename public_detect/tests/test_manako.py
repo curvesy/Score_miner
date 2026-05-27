@@ -129,6 +129,61 @@ def test_load_manako_frames_from_index_follows_responses_key(monkeypatch) -> Non
     assert frames[0].challenge_id == "c7"
 
 
+def test_load_manako_frames_from_index_can_require_positive_score(monkeypatch) -> None:
+    fetched = []
+
+    def fake_fetch(url: str):
+        fetched.append(url)
+        if url.endswith("zero.json"):
+            return [
+                {
+                    "payload": {
+                        "composite_score": 0.0,
+                        "telemetry": {
+                            "run": {
+                                "success": True,
+                                "responses_key": "manako/manak0_Detect-beverage-detect/hotkey/responses/zero.json",
+                            }
+                        },
+                    }
+                }
+            ]
+        if url.endswith("ok.json") and "/evaluation/" in url:
+            return [
+                {
+                    "payload": {
+                        "composite_score": 0.2,
+                        "telemetry": {
+                            "run": {
+                                "success": True,
+                                "responses_key": "manako/manak0_Detect-beverage-detect/hotkey/responses/ok.json",
+                            }
+                        },
+                    }
+                }
+            ]
+        return {
+            "frames": [{"frame_id": 0, "url": "https://x/challenge-objects/c9/images/a.png"}],
+            "predictions": {"frames": [{"frame_id": 0, "boxes": []}]},
+        }
+
+    monkeypatch.setattr("public_detect.manako.fetch_manako_payload", fake_fetch)
+
+    frames = load_manako_frames_from_index(
+        index_data=[
+            "manako/manak0_Detect-beverage-detect/hotkey/evaluation/zero.json",
+            "manako/manak0_Detect-beverage-detect/hotkey/evaluation/ok.json",
+        ],
+        index_url="https://turbo.scoredata.me/manako/index.json",
+        element_filters=("Detect-beverage",),
+        min_score=0.001,
+    )
+
+    assert len(frames) == 1
+    assert any("/responses/ok.json" in url for url in fetched)
+    assert not any("/responses/zero.json" in url for url in fetched)
+
+
 def test_parse_manako_frames_finds_nested_entries() -> None:
     data = {
         "result": {

@@ -71,6 +71,7 @@ def download_manako_frames(
     limit: int | None = None,
     element_filters: tuple[str, ...] = (),
     max_refs: int | None = None,
+    min_score: float | None = None,
     verbose: bool = False,
 ) -> dict[str, Any]:
     output = Path(output_dir)
@@ -88,6 +89,7 @@ def download_manako_frames(
         limit=limit,
         element_filters=element_filters,
         max_refs=max_refs,
+        min_score=min_score,
         verbose=verbose,
         return_skipped=True,
     )
@@ -125,6 +127,7 @@ def download_manako_frames(
         "index_url": index_url,
         "element_filters": element_filters,
         "max_refs": max_refs,
+        "min_score": min_score,
         "frames": len(rows),
         "skipped_refs": skipped_refs,
         "rows": rows,
@@ -140,6 +143,7 @@ def load_manako_frames_from_index(
     limit: int | None = None,
     element_filters: tuple[str, ...] = (),
     max_refs: int | None = None,
+    min_score: float | None = None,
     verbose: bool = False,
     return_skipped: bool = False,
 ) -> list[ManakoFrame] | tuple[list[ManakoFrame], list[dict[str, str]]]:
@@ -177,7 +181,7 @@ def load_manako_frames_from_index(
             continue
         parsed = parse_manako_frames(payload)
         if not parsed:
-            for response_ref in _collect_response_refs(payload, base_url=ref):
+            for response_ref in _collect_response_refs(payload, base_url=ref, min_score=min_score):
                 try:
                     if verbose:
                         print(f"[manako] fetching response {response_ref}", flush=True)
@@ -296,18 +300,30 @@ def _collect_challenge_refs(data: Any, base_url: str) -> list[str]:
     return list(reversed(refs))
 
 
-def _collect_response_refs(data: Any, base_url: str) -> list[str]:
+def _collect_response_refs(data: Any, base_url: str, min_score: float | None = None) -> list[str]:
     refs: list[str] = []
     parsed_base = urllib.parse.urlparse(base_url)
     origin = f"{parsed_base.scheme}://{parsed_base.netloc}/"
 
     def visit(value: Any) -> None:
         if isinstance(value, dict):
+            telemetry = value.get("telemetry")
+            if isinstance(telemetry, dict):
+                run = telemetry.get("run")
+                if (
+                    isinstance(run, dict)
+                    and isinstance(run.get("responses_key"), str)
+                    and _response_is_usable(container=value, run=run, min_score=min_score)
+                ):
+                    refs.append(_resolve_manako_ref(run["responses_key"], base_url=base_url, origin=origin))
             run = value.get("run")
             if isinstance(run, dict) and isinstance(run.get("responses_key"), str):
-                if run.get("success") is not False:
+                if _response_is_usable(container=value, run=run, min_score=min_score):
                     refs.append(_resolve_manako_ref(run["responses_key"], base_url=base_url, origin=origin))
-            if isinstance(value.get("responses_key"), str) and value.get("success") is not False:
+            if (
+                isinstance(value.get("responses_key"), str)
+                and _response_is_usable(container=value, run=value, min_score=min_score)
+            ):
                 refs.append(_resolve_manako_ref(value["responses_key"], base_url=base_url, origin=origin))
             for item in value.values():
                 visit(item)
@@ -318,6 +334,31 @@ def _collect_response_refs(data: Any, base_url: str) -> list[str]:
 
     visit(data)
     return list(dict.fromkeys(refs))
+
+
+def _response_is_usable(
+    *,
+    container: dict[str, Any],
+    run: dict[str, Any],
+    min_score: float | None,
+) -> bool:
+    if run.get("success") is False:
+        return False
+    if min_score is None:
+        return True
+    score = _score_from_payload(container)
+    return score is not None and score >= min_score
+
+
+def _score_from_payload(value: dict[str, Any]) -> float | None:
+    candidates = [
+        value.get("composite_score"),
+        (value.get("metrics") or {}).get("composite_score") if isinstance(value.get("metrics"), dict) else None,
+    ]
+    for candidate in candidates:
+        if isinstance(candidate, int | float):
+            return float(candidate)
+    return None
 
 
 def _looks_like_challenge_ref(value: str) -> bool:
