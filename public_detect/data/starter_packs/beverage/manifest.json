@@ -5,106 +5,106 @@
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/1cd714d8d46d4e4683f843e2e5c9ef5e.json",
       "asset_id": "b07d96c42ad842cc9b9987df27a3d20c",
       "box_count": 14,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/b07d96c42ad842cc9b9987df27a3d20c.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/b07d96c42ad842cc9b9987df27a3d20c.embedded.json",
       "frame_index": 30,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/b07d96c42ad842cc9b9987df27a3d20c.png",
+      "image": "data/starter_packs/beverage/images/b07d96c42ad842cc9b9987df27a3d20c.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/b07d96c42ad842cc9b9987df27a3d20c.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/b07d96c42ad842cc9b9987df27a3d20c.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/b07d96c42ad842cc9b9987df27a3d20c.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/57f9af37493b4f2eb63f8a57597d7f04.json",
       "asset_id": "a5271a3ef0ab4792b89d13ae40ae0844",
       "box_count": 9,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/a5271a3ef0ab4792b89d13ae40ae0844.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/a5271a3ef0ab4792b89d13ae40ae0844.embedded.json",
       "frame_index": 112,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/a5271a3ef0ab4792b89d13ae40ae0844.png",
+      "image": "data/starter_packs/beverage/images/a5271a3ef0ab4792b89d13ae40ae0844.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/a5271a3ef0ab4792b89d13ae40ae0844.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/a5271a3ef0ab4792b89d13ae40ae0844.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/a5271a3ef0ab4792b89d13ae40ae0844.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/134530f2e7854d0181e43712f39e4768.json",
       "asset_id": "a1603897ebea46ef94ec3af04b21cdf2",
       "box_count": 10,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/a1603897ebea46ef94ec3af04b21cdf2.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/a1603897ebea46ef94ec3af04b21cdf2.embedded.json",
       "frame_index": 149,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/a1603897ebea46ef94ec3af04b21cdf2.png",
+      "image": "data/starter_packs/beverage/images/a1603897ebea46ef94ec3af04b21cdf2.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/a1603897ebea46ef94ec3af04b21cdf2.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/a1603897ebea46ef94ec3af04b21cdf2.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/a1603897ebea46ef94ec3af04b21cdf2.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/ed603cae4133417882d2a62f30e121e8.json",
       "asset_id": "087c03a8b369467fb2cd0de44ebd3211",
       "box_count": 22,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/087c03a8b369467fb2cd0de44ebd3211.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/087c03a8b369467fb2cd0de44ebd3211.embedded.json",
       "frame_index": 177,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/087c03a8b369467fb2cd0de44ebd3211.png",
+      "image": "data/starter_packs/beverage/images/087c03a8b369467fb2cd0de44ebd3211.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/087c03a8b369467fb2cd0de44ebd3211.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/087c03a8b369467fb2cd0de44ebd3211.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/087c03a8b369467fb2cd0de44ebd3211.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/98be002e55e543348ecc3773c0193c10.json",
       "asset_id": "8c47c68f7bf8432b8746714e14c08cdb",
       "box_count": 20,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/8c47c68f7bf8432b8746714e14c08cdb.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/8c47c68f7bf8432b8746714e14c08cdb.embedded.json",
       "frame_index": 274,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/8c47c68f7bf8432b8746714e14c08cdb.png",
+      "image": "data/starter_packs/beverage/images/8c47c68f7bf8432b8746714e14c08cdb.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/8c47c68f7bf8432b8746714e14c08cdb.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/8c47c68f7bf8432b8746714e14c08cdb.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/8c47c68f7bf8432b8746714e14c08cdb.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/253c7aaf6827470589173325137a68a5.json",
       "asset_id": "737adfef5a324338ad95c2b87cbbf2a6",
       "box_count": 21,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/737adfef5a324338ad95c2b87cbbf2a6.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/737adfef5a324338ad95c2b87cbbf2a6.embedded.json",
       "frame_index": 285,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/737adfef5a324338ad95c2b87cbbf2a6.png",
+      "image": "data/starter_packs/beverage/images/737adfef5a324338ad95c2b87cbbf2a6.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/737adfef5a324338ad95c2b87cbbf2a6.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/737adfef5a324338ad95c2b87cbbf2a6.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/737adfef5a324338ad95c2b87cbbf2a6.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/2ce97cf444134a80b74d437059dff95e.json",
       "asset_id": "7c07b06db13e448fa7d8098346965fb3",
       "box_count": 19,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/7c07b06db13e448fa7d8098346965fb3.embedded.json",
+      "embedded_annotation": "data/starter_packs/beverage/annotations/7c07b06db13e448fa7d8098346965fb3.embedded.json",
       "frame_index": 300,
-      "image": "score_miner_project/public_detect/data/starter_packs/beverage/images/7c07b06db13e448fa7d8098346965fb3.png",
+      "image": "data/starter_packs/beverage/images/7c07b06db13e448fa7d8098346965fb3.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/aa14d42b64594bb7a20e6c2b253355a5/f5b5247a9bf444309a0b46dcca00cb4a/assets/7c07b06db13e448fa7d8098346965fb3.png",
       "objects": [
         "cup",
         "bottle",
         "can"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/beverage/annotations/7c07b06db13e448fa7d8098346965fb3.source.json"
+      "source_annotation": "data/starter_packs/beverage/annotations/7c07b06db13e448fa7d8098346965fb3.source.json"
     }
   ],
   "element_id": "manak0/Detect-beverage-detect",

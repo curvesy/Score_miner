@@ -220,6 +220,101 @@ reports/failure_reviews/car_wash_yolo11n_starter/
 reports/failure_reviews/beverage_yolo11n_starter/
 ```
 
+## Local 8GB GPU Workflow
+
+Your local RTX 3070 Laptop GPU is enough for review, starter baselines, and
+SAHI sweeps. Keep Phase 4 training small:
+
+```text
+YOLO11n only first
+imgsz 768-960
+batch 2-4
+SAHI inference test before deploy
+```
+
+Run locally in this order:
+
+```bash
+cd /home/sina/projects/validator_improve/score_miner_project/public_detect
+uv sync --group inference
+PYTHONPATH=src uv run python scripts/check_gpu_env.py
+```
+
+Download Score starter data:
+
+```bash
+PYTHONPATH=src uv run python scripts/download_starter_pack.py \
+  --element-config configs/elements/car_wash.yaml
+
+PYTHONPATH=src uv run python scripts/download_starter_pack.py \
+  --element-config configs/elements/beverage.yaml
+```
+
+Download live Score-distribution Manako challenge frames. Keep beverage and
+car-wash separate so the downloader does not waste time scanning old unrelated
+elements:
+
+```bash
+PYTHONPATH=src uv run python scripts/download_manako_challenge_frames.py \
+  --output-dir data/proof_frames/manako_challenges_beverage \
+  --limit 300 \
+  --element-filter Detect-beverage \
+  --max-refs 3000
+
+PYTHONPATH=src uv run python scripts/download_manako_challenge_frames.py \
+  --output-dir data/proof_frames/manako_challenges_car_wash \
+  --limit 300 \
+  --element-filter Detect-car-wash \
+  --max-refs 3000
+```
+
+The Manako prediction boxes are untrusted pseudo-labels. Use them only for
+visual review unless manually corrected.
+
+Create a review sheet:
+
+```bash
+PYTHONPATH=src uv run python scripts/make_contact_sheet.py \
+  --input-dir data/proof_frames/manako_challenges_beverage/overlays \
+  --output reports/source_reviews/manako_beverage_overlays_sheet.jpg \
+  --limit 120 \
+  --thumb-width 260 \
+  --columns 5
+
+PYTHONPATH=src uv run python scripts/make_contact_sheet.py \
+  --input-dir data/proof_frames/manako_challenges_car_wash/overlays \
+  --output reports/source_reviews/manako_car_wash_overlays_sheet.jpg \
+  --limit 120 \
+  --thumb-width 260 \
+  --columns 5
+```
+
+Run single-pass and SAHI score sweeps on the starter validation set:
+
+```bash
+PYTHONPATH=src uv run python scripts/score_threshold_sweep.py \
+  --model runs/car_wash/yolo11n_starter/weights/best.pt \
+  --data data/yolo/car_wash_starter/data.yaml \
+  --name car_wash_yolo11n_single_starter \
+  --base-conf 0.001 \
+  --per-class
+
+PYTHONPATH=src uv run python scripts/score_threshold_sweep.py \
+  --model runs/car_wash/yolo11n_starter/weights/best.pt \
+  --data data/yolo/car_wash_starter/data.yaml \
+  --name car_wash_yolo11n_sahi_starter \
+  --prediction-mode sahi \
+  --device cuda:0 \
+  --base-conf 0.001 \
+  --sahi-slice-height 640 \
+  --sahi-slice-width 640 \
+  --sahi-overlap 0.25 \
+  --per-class
+```
+
+Do not train on Manako predictions directly. First inspect the sheet, select
+Score-like frames, and manually correct labels.
+
 Open the `full/*.jpg` files to inspect whole-image failures, and the `crops/`
 folders to inspect individual missed objects or false positives. The next data
 work must come from these review artifacts.

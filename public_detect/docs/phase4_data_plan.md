@@ -126,6 +126,7 @@ Highest value:
 Score starterPack images and annotations
 Score latestAnnotatedChallenge/proof frames if available
 Score challenge frames where we can legally store/review them
+Score Manako challenge frames from turbo.scoredata.me/manako/index.json
 ```
 
 Why:
@@ -142,6 +143,15 @@ data/starter_packs/car_wash/
 data/starter_packs/beverage/
 data/yolo/car_wash_starter/
 data/yolo/beverage_starter/
+data/proof_frames/manako_challenges/
+```
+
+Manako warning:
+
+```text
+Manako prediction boxes are untrusted pseudo-labels, not ground truth.
+Use them as visual hints and competitor/debug overlays only.
+Manually correct selected boxes before adding them to training.
 ```
 
 ### Level 2: Real Outside Data
@@ -363,7 +373,61 @@ This file records accepted source types, reject patterns, class-query prompts,
 and Beverage public candidates. Use it as the control plane before downloading
 or labeling outside data.
 
-### Step 1: Failure Review Exporter
+### Step 1: Score-Distribution Frame Collector
+
+First pull Score-distribution Manako frames. Filter by element; the public
+index contains tens of thousands of historical refs, including completed
+elements that are not useful for this build.
+
+```bash
+PYTHONPATH=src uv run python scripts/download_manako_challenge_frames.py \
+  --output-dir data/proof_frames/manako_challenges_beverage \
+  --limit 300 \
+  --element-filter Detect-beverage \
+  --max-refs 3000
+
+PYTHONPATH=src uv run python scripts/download_manako_challenge_frames.py \
+  --output-dir data/proof_frames/manako_challenges_car_wash \
+  --limit 300 \
+  --element-filter Detect-car-wash \
+  --max-refs 3000
+```
+
+Then render contact sheets:
+
+```bash
+PYTHONPATH=src uv run python scripts/make_contact_sheet.py \
+  --input-dir data/proof_frames/manako_challenges_beverage/overlays \
+  --output reports/source_reviews/manako_beverage_overlays_sheet.jpg \
+  --limit 120 \
+  --thumb-width 260 \
+  --columns 5
+
+PYTHONPATH=src uv run python scripts/make_contact_sheet.py \
+  --input-dir data/proof_frames/manako_challenges_car_wash/overlays \
+  --output reports/source_reviews/manako_car_wash_overlays_sheet.jpg \
+  --limit 120 \
+  --thumb-width 260 \
+  --columns 5
+```
+
+Status:
+
+```text
+IMPLEMENTED
+```
+
+Implementation:
+
+```text
+src/public_detect/manako.py
+scripts/download_manako_challenge_frames.py
+```
+
+Use this sheet before collecting more outside data. It tells us what Score is
+currently challenging: stadium beverage, CCTV car-wash, or mixed task frames.
+
+### Step 2: Failure Review Exporter
 
 Build a script that reads:
 
@@ -476,7 +540,7 @@ Beverage:
     can: 16 miss / 12 FP
 ```
 
-### Step 2: Car-wash Targeted Data
+### Step 3: Car-wash Targeted Data
 
 First target:
 
@@ -521,7 +585,7 @@ Record the source URL/license before labels are created.
 Do not train on extracted frames until they are labeled and reviewed.
 ```
 
-### Step 3: Beverage Targeted Data
+### Step 4: Beverage Targeted Data
 
 First target:
 
@@ -578,7 +642,7 @@ manifest.json
 The `manifest.json` records source path, mapped labels, hard-negative labels,
 review status, and license note.
 
-### Step 4: Label And Review
+### Step 5: Label And Review
 
 Use:
 
@@ -592,6 +656,7 @@ Review requirements:
 
 ```text
 All Score starter/proof labels must remain trusted.
+Raw Manako prediction boxes must not be trusted until manually corrected.
 Teacher labels must be spot-checked.
 Wrong-domain or noisy labels are removed before training.
 ```
@@ -607,7 +672,7 @@ configs/data_sources/beverage_roboflow_containers.yaml
 configs/data_sources/phase4_sources.yaml
 ```
 
-### Step 5: Merge Dataset
+### Step 6: Merge Dataset
 
 Create new YOLO datasets:
 
@@ -634,7 +699,7 @@ review status
 license/source URL where applicable
 ```
 
-### Step 6: Retrain
+### Step 7: Retrain
 
 Retrain:
 
@@ -646,7 +711,7 @@ YOLO26 stays parked until YOLO11n Phase 4 is measured
 
 Do not judge by training mAP only.
 
-### Step 7: Re-run Phase 3
+### Step 8: Re-run Phase 3
 
 After retrain:
 
@@ -684,12 +749,15 @@ false_positive > 0.85
 Current best Phase 4 order:
 
 ```text
-1. Build failure-review exporter.
-2. Review Car-wash misses.
-3. Build Car-wash nozzle/drainage targeted data.
-4. Retrain Car-wash YOLO11n.
-5. Re-run Phase 3.
-6. In parallel or after Car-wash v1, build Beverage data from TACO/Roboflow.
+1. Download Manako challenge frames and make overlay sheet.
+2. Split useful Score-distribution frames by task/style.
+3. Build/review failure-review overlays.
+4. Review Car-wash misses.
+5. Manually correct high-value Manako/Score-like labels.
+6. Build Car-wash nozzle/drainage targeted data.
+7. Retrain Car-wash YOLO11n.
+8. Re-run Phase 3 single-pass and SAHI sweeps.
+9. In parallel or after Car-wash v1, build Beverage data from Manako/TACO/Roboflow.
 ```
 
 Reason:

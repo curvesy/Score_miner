@@ -41,12 +41,17 @@ Each implementation task starts with a research checkpoint. Do not add code for 
 ## Phase 3 - Score-Style Validation
 
 - [ ] Research current public scoring fields in Score result shards.
-- [ ] Implement proof/latest challenge frame collector.
+- [x] Implement Manako challenge frame collector and untrusted prediction overlay renderer.
+- [x] Add element-filtered Manako scans so we do not waste time on unrelated historical refs.
+- [ ] Download separate Beverage and Car-wash Manako frame sets with `--element-filter`.
+- [ ] Review Manako challenge frame sheets and split by element/style.
 - [ ] Implement competitor prediction collector from console/result shards where accessible.
 - [x] Implement local approximation of map50 + false-positive composite. Do not skip this; it is the validator-style instrument for picking a winner.
 - [x] Implement confidence threshold sweep.
 - [x] Implement per-class threshold sweep.
 - [ ] Implement max-det and image-size sweep.
+- [x] Add optional SAHI tiled inference mode to threshold sweep.
+- [ ] Compare single-pass vs SAHI on starter/proof frames before deployment.
 - [ ] Add Optuna config-only search for thresholds/imgsz/max-det/SAHI settings after brute-force sweep works.
 - [x] Generate score reports for Car-wash and Beverage.
 - [x] Generate diagnostics for false positives and missed ground-truth boxes.
@@ -72,6 +77,7 @@ Next implementation should start Phase 4 from these diagnostics, not random data
 - [ ] Research current SAM3/GroundingDINO/Supervision pseudo-label path for offline labeling only.
 - [ ] Research current FiftyOne/CVAT workflow for manual review and hard-negative correction.
 - [x] Write Phase 4 source-priority and data-plan doc for Car-wash and Beverage.
+- [x] Add local 8GB GPU Manako/SAHI workflow to README.
 - [ ] Use Phase 3 failures to define the data plan before generating data.
 - [x] Build failure-review exporter from `diagnostics.json`.
 - [x] Export Car-wash and Beverage failure review artifacts.
@@ -83,9 +89,11 @@ Next implementation should start Phase 4 from these diagnostics, not random data
 - [x] Add Car-wash local video frame extraction script.
 - [ ] Download or mount approved Beverage source data, then run COCO ingestion.
 - [ ] Collect approved Car-wash videos, then run frame extraction.
+- [ ] Prefer Score Manako/starter frames over outside data when selecting manual-label work.
 - [ ] Build diverse synthetic generation recipe for Beverage.
 - [ ] Build diverse synthetic generation recipe for Car-wash.
 - [ ] Build teacher-assisted pseudo-label queue for unlabeled Score-style/proof/public images.
+- [ ] Manually correct a high-value Manako frame set; do not train on raw Manako predictions.
 - [ ] Manually review a small high-value set before trusting pseudo-labels.
 - [ ] Build hard-negative sets.
 - [ ] Retrain with diversity-first data.

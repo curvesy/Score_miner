@@ -5,9 +5,9 @@
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/4970628ad8c34f5fa27cf1cb55fc8975.json",
       "asset_id": "b648d53a977a48299d5662203f382a23",
       "box_count": 4,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/b648d53a977a48299d5662203f382a23.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/b648d53a977a48299d5662203f382a23.embedded.json",
       "frame_index": 285,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/b648d53a977a48299d5662203f382a23.png",
+      "image": "data/starter_packs/car_wash/images/b648d53a977a48299d5662203f382a23.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/b648d53a977a48299d5662203f382a23.png",
       "objects": [
         "broom",
@@ -15,15 +15,15 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/b648d53a977a48299d5662203f382a23.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/b648d53a977a48299d5662203f382a23.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/d715f356f6684aee8f9dbacfc77e9acc.json",
       "asset_id": "8eb7305f24354d1f88576c8ec9b36524",
       "box_count": 7,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/8eb7305f24354d1f88576c8ec9b36524.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/8eb7305f24354d1f88576c8ec9b36524.embedded.json",
       "frame_index": 248,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/8eb7305f24354d1f88576c8ec9b36524.png",
+      "image": "data/starter_packs/car_wash/images/8eb7305f24354d1f88576c8ec9b36524.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/8eb7305f24354d1f88576c8ec9b36524.png",
       "objects": [
         "broom",
@@ -31,15 +31,15 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/8eb7305f24354d1f88576c8ec9b36524.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/8eb7305f24354d1f88576c8ec9b36524.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/c32c72bd42124796bc1fc22efc5e0ccd.json",
       "asset_id": "e1bb6be201ef4b6ca26fcb11b6ec79b0",
       "box_count": 5,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/e1bb6be201ef4b6ca26fcb11b6ec79b0.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/e1bb6be201ef4b6ca26fcb11b6ec79b0.embedded.json",
       "frame_index": 225,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/e1bb6be201ef4b6ca26fcb11b6ec79b0.png",
+      "image": "data/starter_packs/car_wash/images/e1bb6be201ef4b6ca26fcb11b6ec79b0.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/e1bb6be201ef4b6ca26fcb11b6ec79b0.png",
       "objects": [
         "broom",
@@ -47,15 +47,15 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/e1bb6be201ef4b6ca26fcb11b6ec79b0.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/e1bb6be201ef4b6ca26fcb11b6ec79b0.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/1a94ea0bb9a34e308bf3cbf2f5eaa8e4.json",
       "asset_id": "750b3fb11e744c4b9af2c949069ba0c6",
       "box_count": 6,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/750b3fb11e744c4b9af2c949069ba0c6.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/750b3fb11e744c4b9af2c949069ba0c6.embedded.json",
       "frame_index": 146,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/750b3fb11e744c4b9af2c949069ba0c6.png",
+      "image": "data/starter_packs/car_wash/images/750b3fb11e744c4b9af2c949069ba0c6.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/750b3fb11e744c4b9af2c949069ba0c6.png",
       "objects": [
         "broom",
@@ -63,15 +63,15 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/750b3fb11e744c4b9af2c949069ba0c6.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/750b3fb11e744c4b9af2c949069ba0c6.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/db7d4bdabb0742f48423130b56eea035.json",
       "asset_id": "72308c1ad7844eb59747295a8be4197e",
       "box_count": 18,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/72308c1ad7844eb59747295a8be4197e.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/72308c1ad7844eb59747295a8be4197e.embedded.json",
       "frame_index": 92,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/72308c1ad7844eb59747295a8be4197e.png",
+      "image": "data/starter_packs/car_wash/images/72308c1ad7844eb59747295a8be4197e.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/72308c1ad7844eb59747295a8be4197e.png",
       "objects": [
         "broom",
@@ -79,15 +79,15 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/72308c1ad7844eb59747295a8be4197e.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/72308c1ad7844eb59747295a8be4197e.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/6bc6542429164d0ea869d80473c7d57c.json",
       "asset_id": "196c224be31f49e7a7054815d573037e",
       "box_count": 9,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/196c224be31f49e7a7054815d573037e.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/196c224be31f49e7a7054815d573037e.embedded.json",
       "frame_index": 63,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/196c224be31f49e7a7054815d573037e.png",
+      "image": "data/starter_packs/car_wash/images/196c224be31f49e7a7054815d573037e.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/196c224be31f49e7a7054815d573037e.png",
       "objects": [
         "broom",
@@ -95,15 +95,15 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/196c224be31f49e7a7054815d573037e.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/196c224be31f49e7a7054815d573037e.source.json"
     },
     {
       "annotation_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/0856328836dd4ff181065f380d63e6ee.json",
       "asset_id": "a442074dad57451c943eca42cfb88dc9",
       "box_count": 14,
-      "embedded_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/a442074dad57451c943eca42cfb88dc9.embedded.json",
+      "embedded_annotation": "data/starter_packs/car_wash/annotations/a442074dad57451c943eca42cfb88dc9.embedded.json",
       "frame_index": 36,
-      "image": "score_miner_project/public_detect/data/starter_packs/car_wash/images/a442074dad57451c943eca42cfb88dc9.png",
+      "image": "data/starter_packs/car_wash/images/a442074dad57451c943eca42cfb88dc9.png",
       "image_url": "https://manako.scoredata.me/manako/upcoming/4d58d091943949cea518cd99a6cfda39/cf37c79c955248b5949a454103535bf9/assets/a442074dad57451c943eca42cfb88dc9.png",
       "objects": [
         "broom",
@@ -111,7 +111,7 @@
         "nozzle",
         "track"
       ],
-      "source_annotation": "score_miner_project/public_detect/data/starter_packs/car_wash/annotations/a442074dad57451c943eca42cfb88dc9.source.json"
+      "source_annotation": "data/starter_packs/car_wash/annotations/a442074dad57451c943eca42cfb88dc9.source.json"
     }
   ],
   "element_id": "manak0/Detect-car-wash",

@@ -8,12 +8,14 @@ visual review, but they should not be promoted to ground truth without review.
 from __future__ import annotations
 
 import json
+import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+import yaml
 from PIL import Image, ImageDraw, ImageFont
 
 from public_detect.score_api import USER_AGENT, download_bytes, fetch_json
@@ -67,6 +69,9 @@ def download_manako_frames(
     output_dir: str | Path,
     index_url: str = MANAKO_INDEX_URL,
     limit: int | None = None,
+    element_filters: tuple[str, ...] = (),
+    max_refs: int | None = None,
+    verbose: bool = False,
 ) -> dict[str, Any]:
     output = Path(output_dir)
     images_dir = output / "images"
@@ -74,16 +79,32 @@ def download_manako_frames(
     images_dir.mkdir(parents=True, exist_ok=True)
     overlays_dir.mkdir(parents=True, exist_ok=True)
 
+    if verbose:
+        print(f"[manako] fetching index: {index_url}", flush=True)
     index_data = fetch_manako_index(index_url)
-    frames = parse_manako_frames(index_data)
+    frames, skipped_refs = load_manako_frames_from_index(
+        index_data=index_data,
+        index_url=index_url,
+        limit=limit,
+        element_filters=element_filters,
+        max_refs=max_refs,
+        verbose=verbose,
+        return_skipped=True,
+    )
     if limit is not None:
         frames = frames[:limit]
+    if verbose:
+        print(f"[manako] usable frames: {len(frames)} skipped refs: {len(skipped_refs)}", flush=True)
 
     rows = []
-    for frame in frames:
+    for idx, frame in enumerate(frames, start=1):
         image_path = images_dir / frame.image_name
         if not image_path.exists():
+            if verbose:
+                print(f"[manako] downloading {idx}/{len(frames)} {frame.url}", flush=True)
             image_path.write_bytes(download_bytes(frame.url))
+        elif verbose:
+            print(f"[manako] exists {idx}/{len(frames)} {image_path.name}", flush=True)
         overlay_path = overlays_dir / f"{image_path.stem}.jpg"
         render_prediction_overlay(
             image_path=image_path,
@@ -102,11 +123,96 @@ def download_manako_frames(
 
     manifest = {
         "index_url": index_url,
+        "element_filters": element_filters,
+        "max_refs": max_refs,
         "frames": len(rows),
+        "skipped_refs": skipped_refs,
         "rows": rows,
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     return manifest
+
+
+def load_manako_frames_from_index(
+    *,
+    index_data: Any,
+    index_url: str = MANAKO_INDEX_URL,
+    limit: int | None = None,
+    element_filters: tuple[str, ...] = (),
+    max_refs: int | None = None,
+    verbose: bool = False,
+    return_skipped: bool = False,
+) -> list[ManakoFrame] | tuple[list[ManakoFrame], list[dict[str, str]]]:
+    """Parse frames directly or follow challenge-file references from an index."""
+    direct_frames = parse_manako_frames(index_data)
+    if direct_frames:
+        if verbose:
+            print(f"[manako] index contains direct frames: {len(direct_frames)}", flush=True)
+        if return_skipped:
+            return direct_frames, []
+        return direct_frames
+
+    frames: list[ManakoFrame] = []
+    skipped_refs: list[dict[str, str]] = []
+    seen_refs: set[str] = set()
+    refs = _collect_challenge_refs(index_data, base_url=index_url)
+    if element_filters:
+        refs = [ref for ref in refs if _matches_element_filters(ref, element_filters)]
+    if max_refs is not None:
+        refs = refs[:max_refs]
+    if verbose:
+        print(f"[manako] index refs found: {len(refs)}", flush=True)
+    for idx, ref in enumerate(refs, start=1):
+        if ref in seen_refs:
+            continue
+        seen_refs.add(ref)
+        try:
+            if verbose:
+                print(f"[manako] fetching ref {idx}/{len(refs)} {ref}", flush=True)
+            payload = fetch_manako_payload(ref)
+        except Exception as exc:
+            skipped_refs.append({"url": ref, "error": f"{type(exc).__name__}: {exc}"})
+            if verbose:
+                print(f"[manako] skipped ref {ref}: {type(exc).__name__}: {exc}", flush=True)
+            continue
+        parsed = parse_manako_frames(payload)
+        if not parsed:
+            for response_ref in _collect_response_refs(payload, base_url=ref):
+                try:
+                    if verbose:
+                        print(f"[manako] fetching response {response_ref}", flush=True)
+                    response_payload = fetch_manako_payload(response_ref)
+                except Exception as exc:
+                    skipped_refs.append({"url": response_ref, "error": f"{type(exc).__name__}: {exc}"})
+                    if verbose:
+                        print(
+                            f"[manako] skipped response {response_ref}: {type(exc).__name__}: {exc}",
+                            flush=True,
+                        )
+                    continue
+                parsed.extend(parse_manako_frames(response_payload))
+        if verbose:
+            print(f"[manako] parsed frames from ref: {len(parsed)}", flush=True)
+        frames.extend(parsed)
+        frames = _dedupe_frames(frames)
+        if limit is not None and len(frames) >= limit:
+            frames = frames[:limit]
+            if return_skipped:
+                return frames, skipped_refs
+            return frames
+    if return_skipped:
+        return frames, skipped_refs
+    return frames
+
+
+def fetch_manako_payload(url: str) -> Any:
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=60) as response:
+        raw = response.read().decode("utf-8", "replace")
+    suffix = Path(urllib.parse.urlparse(url).path).suffix.lower()
+    if suffix in {".yaml", ".yml"}:
+        return yaml.safe_load(raw)
+    return json.loads(raw)
 
 
 def render_prediction_overlay(
@@ -147,9 +253,93 @@ def _candidate_entries(data: Any) -> list[dict[str, Any]]:
         entries = [item for item in data.values() if isinstance(item, dict) and "frames" in item]
         if entries:
             return entries
+        nested = []
+        for value in data.values():
+            nested.extend(_candidate_entries(value))
+        if nested:
+            return nested
     if isinstance(data, list):
-        return [item for item in data if isinstance(item, dict)]
+        direct = [item for item in data if isinstance(item, dict) and "frames" in item]
+        if direct:
+            return direct
+        nested = []
+        for item in data:
+            nested.extend(_candidate_entries(item))
+        if nested:
+            return nested
     return []
+
+
+def _collect_challenge_refs(data: Any, base_url: str) -> list[str]:
+    refs: list[str] = []
+    parsed_base = urllib.parse.urlparse(base_url)
+    origin = f"{parsed_base.scheme}://{parsed_base.netloc}/"
+
+    def visit(value: Any) -> None:
+        if isinstance(value, str):
+            ref = value.strip()
+            if _looks_like_challenge_ref(ref):
+                refs.append(_resolve_manako_ref(ref, base_url=base_url, origin=origin))
+            return
+        if isinstance(value, list):
+            for item in value:
+                visit(item)
+            return
+        if isinstance(value, dict):
+            for key in ("url", "href", "path", "key", "file", "filename"):
+                if key in value:
+                    visit(value[key])
+            for item in value.values():
+                visit(item)
+
+    visit(data)
+    return list(reversed(refs))
+
+
+def _collect_response_refs(data: Any, base_url: str) -> list[str]:
+    refs: list[str] = []
+    parsed_base = urllib.parse.urlparse(base_url)
+    origin = f"{parsed_base.scheme}://{parsed_base.netloc}/"
+
+    def visit(value: Any) -> None:
+        if isinstance(value, dict):
+            run = value.get("run")
+            if isinstance(run, dict) and isinstance(run.get("responses_key"), str):
+                if run.get("success") is not False:
+                    refs.append(_resolve_manako_ref(run["responses_key"], base_url=base_url, origin=origin))
+            if isinstance(value.get("responses_key"), str) and value.get("success") is not False:
+                refs.append(_resolve_manako_ref(value["responses_key"], base_url=base_url, origin=origin))
+            for item in value.values():
+                visit(item)
+            return
+        if isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    visit(data)
+    return list(dict.fromkeys(refs))
+
+
+def _looks_like_challenge_ref(value: str) -> bool:
+    path = urllib.parse.urlparse(value).path.lower()
+    return path.endswith((".json", ".yaml", ".yml")) and not path.endswith("/index.json")
+
+
+def _matches_element_filters(ref: str, element_filters: tuple[str, ...]) -> bool:
+    normalized_ref = ref.lower().replace("_", "-").replace("%2f", "/")
+    return any(
+        item.lower().replace("_", "-").replace("%2f", "/") in normalized_ref
+        for item in element_filters
+    )
+
+
+def _resolve_manako_ref(ref: str, *, base_url: str, origin: str) -> str:
+    if urllib.parse.urlparse(ref).scheme:
+        return ref
+    normalized = ref.lstrip("/")
+    if normalized.startswith("manako/"):
+        return urllib.parse.urljoin(origin, normalized)
+    return urllib.parse.urljoin(base_url, ref)
 
 
 def _challenge_id(entry: dict[str, Any], idx: int) -> str:
@@ -194,7 +384,7 @@ def _dedupe_frames(frames: list[ManakoFrame]) -> list[ManakoFrame]:
     seen = set()
     deduped = []
     for frame in frames:
-        key = (frame.challenge_id, frame.frame_id, frame.url)
+        key = (frame.challenge_id, frame.frame_id)
         if key in seen:
             continue
         seen.add(key)
