@@ -28,6 +28,13 @@ false-positive control
 3. Next NEW public element from radar
 ```
 
+For the current Beverage status, local score interpretation, and the exact A6000
+runbook, read:
+
+```text
+docs/current_status_and_gpu_runbook.md
+```
+
 ## 2026 GPU Setup
 
 Use `uv` for rented GPU machines. This keeps setup reproducible and avoids

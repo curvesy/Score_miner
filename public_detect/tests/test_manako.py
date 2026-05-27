@@ -97,6 +97,36 @@ def test_load_manako_frames_from_index_filters_element_refs(monkeypatch) -> None
     assert fetched == ["https://turbo.scoredata.me/manako/manak0_Detect-beverage-detect/hotkey/evaluation/b.json"]
 
 
+def test_load_manako_frames_from_index_resumes_from_start_ref(monkeypatch) -> None:
+    fetched = []
+
+    def fake_fetch(url: str):
+        fetched.append(url)
+        return {
+            "frames": [{"frame_id": 0, "url": f"https://x/challenge-objects/{Path(url).stem}/images/a.png"}],
+            "predictions": {"frames": [{"frame_id": 0, "boxes": []}]},
+        }
+
+    monkeypatch.setattr("public_detect.manako.fetch_manako_payload", fake_fetch)
+
+    frames = load_manako_frames_from_index(
+        index_data=[
+            "manako/manak0_Detect-beverage-detect/hotkey/evaluation/a.json",
+            "manako/manak0_Detect-beverage-detect/hotkey/evaluation/b.json",
+            "manako/manak0_Detect-beverage-detect/hotkey/evaluation/c.json",
+        ],
+        index_url="https://turbo.scoredata.me/manako/index.json",
+        element_filters=("Detect-beverage",),
+        start_ref=2,
+    )
+
+    assert len(frames) == 2
+    assert fetched == [
+        "https://turbo.scoredata.me/manako/manak0_Detect-beverage-detect/hotkey/evaluation/b.json",
+        "https://turbo.scoredata.me/manako/manak0_Detect-beverage-detect/hotkey/evaluation/a.json",
+    ]
+
+
 def test_load_manako_frames_from_index_follows_responses_key(monkeypatch) -> None:
     def fake_fetch(url: str):
         if "/evaluation/" in url:

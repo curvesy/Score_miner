@@ -30,6 +30,8 @@ artifacts/
 # Local training/review data. These are reproducible or large and should not be committed.
 public_detect/data/external/
 public_detect/data/raw/
+public_detect/data/proof_frames/**
+!public_detect/data/proof_frames/.gitkeep
 public_detect/data/yolo_candidates/
 public_detect/reports/source_reviews/
 public_detect/reports/failure_reviews/**/crops/

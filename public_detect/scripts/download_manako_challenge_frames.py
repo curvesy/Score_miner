@@ -48,6 +48,12 @@ def main() -> None:
         type=float,
         help="Only follow response payloads from evaluations with at least this composite score.",
     )
+    parser.add_argument(
+        "--start-ref",
+        type=int,
+        default=1,
+        help="1-based filtered-ref index to resume from. Matches the logged fetching ref N/T value.",
+    )
     parser.add_argument("--debug-index", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
@@ -62,6 +68,7 @@ def main() -> None:
         element_filters=tuple(args.element_filter),
         max_refs=args.max_refs,
         min_score=args.min_score,
+        start_ref=args.start_ref,
         verbose=not args.quiet,
     )
     print(json.dumps({"output_dir": str(args.output_dir), "frames": manifest["frames"]}, indent=2))

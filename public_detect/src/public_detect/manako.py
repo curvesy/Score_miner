@@ -72,6 +72,7 @@ def download_manako_frames(
     element_filters: tuple[str, ...] = (),
     max_refs: int | None = None,
     min_score: float | None = None,
+    start_ref: int = 1,
     verbose: bool = False,
 ) -> dict[str, Any]:
     output = Path(output_dir)
@@ -90,6 +91,7 @@ def download_manako_frames(
         element_filters=element_filters,
         max_refs=max_refs,
         min_score=min_score,
+        start_ref=start_ref,
         verbose=verbose,
         return_skipped=True,
     )
@@ -128,6 +130,7 @@ def download_manako_frames(
         "element_filters": element_filters,
         "max_refs": max_refs,
         "min_score": min_score,
+        "start_ref": start_ref,
         "frames": len(rows),
         "skipped_refs": skipped_refs,
         "rows": rows,
@@ -144,6 +147,7 @@ def load_manako_frames_from_index(
     element_filters: tuple[str, ...] = (),
     max_refs: int | None = None,
     min_score: float | None = None,
+    start_ref: int = 1,
     verbose: bool = False,
     return_skipped: bool = False,
 ) -> list[ManakoFrame] | tuple[list[ManakoFrame], list[dict[str, str]]]:
@@ -162,17 +166,29 @@ def load_manako_frames_from_index(
     refs = _collect_challenge_refs(index_data, base_url=index_url)
     if element_filters:
         refs = [ref for ref in refs if _matches_element_filters(ref, element_filters)]
+    total_refs = len(refs)
+    if start_ref < 1:
+        raise ValueError("start_ref is 1-based and must be >= 1")
+    if start_ref > 1:
+        refs = refs[start_ref - 1 :]
     if max_refs is not None:
         refs = refs[:max_refs]
     if verbose:
-        print(f"[manako] index refs found: {len(refs)}", flush=True)
-    for idx, ref in enumerate(refs, start=1):
+        if start_ref > 1 or max_refs is not None:
+            print(
+                f"[manako] index refs selected: {len(refs)} of {total_refs} "
+                f"(start_ref={start_ref}, max_refs={max_refs})",
+                flush=True,
+            )
+        else:
+            print(f"[manako] index refs found: {len(refs)}", flush=True)
+    for idx, ref in enumerate(refs, start=start_ref):
         if ref in seen_refs:
             continue
         seen_refs.add(ref)
         try:
             if verbose:
-                print(f"[manako] fetching ref {idx}/{len(refs)} {ref}", flush=True)
+                print(f"[manako] fetching ref {idx}/{total_refs} {ref}", flush=True)
             payload = fetch_manako_payload(ref)
         except Exception as exc:
             skipped_refs.append({"url": ref, "error": f"{type(exc).__name__}: {exc}"})
