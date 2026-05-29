@@ -1,0 +1,91 @@
+{
+  "base_conf": 0.001,
+  "best": {
+    "confidence": 0.6,
+    "fn": 155,
+    "fp": 21,
+    "fp_score": 0.895,
+    "gt": 208,
+    "map50": 0.20621463446027297,
+    "max_det": 20,
+    "mode": "global",
+    "per_class_confidence": "",
+    "precision": 0.7162162162162162,
+    "predictions": 74,
+    "recall": 0.2548076923076923,
+    "score": 0.4817287806761638,
+    "tp": 53
+  },
+  "class_names": {
+    "0": "cup",
+    "1": "bottle",
+    "2": "can"
+  },
+  "data": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_winner_proxy_v1/data.yaml",
+  "diagnostics": {
+    "false_positives": 21,
+    "misses": 155
+  },
+  "imgsz": 960,
+  "iou": 0.7,
+  "metrics": {
+    "classes": [
+      {
+        "ap50": 0.4140031562872416,
+        "cls": 0,
+        "fn": 42,
+        "fp": 17,
+        "fp_score": 0.915,
+        "gt": 83,
+        "name": "cup",
+        "precision": 0.7068965517241379,
+        "predictions": 58,
+        "recall": 0.4939759036144578,
+        "score": 0.614401893772345,
+        "tp": 41
+      },
+      {
+        "ap50": 0.20464074709357727,
+        "cls": 1,
+        "fn": 41,
+        "fp": 4,
+        "fp_score": 0.98,
+        "gt": 53,
+        "name": "bottle",
+        "precision": 0.75,
+        "predictions": 16,
+        "recall": 0.22641509433962265,
+        "score": 0.5147844482561463,
+        "tp": 12
+      },
+      {
+        "ap50": 0.0,
+        "cls": 2,
+        "fn": 72,
+        "fp": 0,
+        "fp_score": 1.0,
+        "gt": 72,
+        "name": "can",
+        "precision": 0.0,
+        "predictions": 0,
+        "recall": 0.0,
+        "score": 0.4,
+        "tp": 0
+      }
+    ],
+    "fn": 155,
+    "fp": 21,
+    "fp_score": 0.895,
+    "gt": 208,
+    "map50": 0.20621463446027297,
+    "precision": 0.7162162162162162,
+    "predictions": 74,
+    "recall": 0.2548076923076923,
+    "score": 0.4817287806761638,
+    "tp": 53
+  },
+  "model": "/home/sina/projects/validator_improve/score_miner_project/public_detect/runs/beverage/yolo11n_phase4_external_v1_local/weights/best.pt",
+  "prediction_mode": "single",
+  "raw_predictions": 5995,
+  "sahi": null
+}

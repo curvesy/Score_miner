@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "bytes": 14553,
+      "path": "miner.py"
+    },
+    {
+      "bytes": 345,
+      "path": "miner_config.json"
+    },
+    {
+      "bytes": 19407502,
+      "path": "weights.onnx"
+    }
+  ],
+  "max_bytes": 30000000,
+  "max_mb_decimal": 30.0,
+  "passes": true,
+  "path": "/home/sina/projects/validator_improve/score_miner_project/public_detect/deploy/manak0_Detect-beverage_yolo26s_v1",
+  "size_bytes": 19422400,
+  "size_mb_decimal": 19.4224
+}

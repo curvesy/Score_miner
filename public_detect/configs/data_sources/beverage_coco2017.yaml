@@ -1,0 +1,17 @@
+source_id: beverage_coco2017_v1
+source_type: coco2017_person_beverage
+element_config: configs/elements/beverage.yaml
+review_status: needs_review
+license_note: "COCO is CC BY 4.0 (images) + CC BY 4.0 (annotations). Attribute COCO Consortium."
+class_map:
+  cup:
+    - cup
+  bottle:
+    - bottle
+  # COCO 2017 has no clean 'can' class; skip.
+hard_negative_categories:
+  - wine glass
+filters:
+  include_images_with_mapped_labels: true
+  include_hard_negative_only_images: false
+  max_images: 1500

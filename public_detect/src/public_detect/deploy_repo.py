@@ -36,6 +36,18 @@ class TVFrameResult(BaseModel):
 
 
 class Miner:
+    """Winner-style ONNX miner.
+
+    Pipeline (per frame):
+      preprocess (letterbox + normalize)
+      -> ONNX inference (optionally on hflip too -> TTA)
+      -> per-class conf filter WITH rescue bonus (top-1 admit when class is empty)
+      -> sane-box filter (min side, min area, max aspect ratio, < 95% image)
+      -> per-class hard NMS
+      -> cluster-max same-class score boost (TTA mode)
+      -> cross-class dedup ordered by (score - per-class threshold) margin
+    """
+
     class_names = __CLASS_NAMES__
     input_size = __INPUT_SIZE__
     iou_thres = __IOU_THRES__
@@ -44,7 +56,9 @@ class Miner:
     min_box_area = __MIN_BOX_AREA__
     max_aspect_ratio = __MAX_ASPECT_RATIO__
     max_det = __MAX_DET__
+    use_tta = __USE_TTA__
     conf_thres = np.array(__CONF_THRESHOLDS__, dtype=np.float32)
+    rescue_bonus = np.array(__RESCUE_BONUS__, dtype=np.float32)
 
     def __init__(self, path_hf_repo: Path) -> None:
         model_path = path_hf_repo / "weights.onnx"
@@ -67,7 +81,7 @@ class Miner:
         self.input_width = self._safe_dim(shape[3], self.input_size)
 
     def __repr__(self) -> str:
-        return f"ONNXRuntime(providers={self.session.get_providers()}, input={self.input_width}x{self.input_height})"
+        return f"ONNXRuntime(providers={self.session.get_providers()}, input={self.input_width}x{self.input_height}, tta={self.use_tta})"
 
     @staticmethod
     def _safe_dim(value, default: int) -> int:
@@ -116,7 +130,7 @@ class Miner:
         return boxes
 
     @staticmethod
-    def _nms(boxes: np.ndarray, scores: np.ndarray, iou_thresh: float) -> np.ndarray:
+    def _hard_nms(boxes: np.ndarray, scores: np.ndarray, iou_thresh: float) -> np.ndarray:
         if len(boxes) == 0:
             return np.empty(0, dtype=np.intp)
         order = np.argsort(-scores)
@@ -137,7 +151,64 @@ class Miner:
             order = rest[iou <= iou_thresh]
         return np.asarray(keep, dtype=np.intp)
 
-    def _filter_boxes(self, boxes: np.ndarray, scores: np.ndarray, cls_ids: np.ndarray, image_size: tuple[int, int]) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    def _per_class_hard_nms(self, boxes, scores, cls_ids, iou_thresh):
+        if len(boxes) == 0:
+            return np.empty(0, dtype=np.intp)
+        all_keep = []
+        for c in np.unique(cls_ids):
+            mask = cls_ids == c
+            indices = np.where(mask)[0]
+            keep = self._hard_nms(boxes[mask], scores[mask], iou_thresh)
+            all_keep.extend(indices[keep].tolist())
+        all_keep.sort()
+        return np.asarray(all_keep, dtype=np.intp)
+
+    def _conf_filter_mask(self, scores: np.ndarray, cls_ids: np.ndarray) -> np.ndarray:
+        """Per-class conf gate with per-class top-1 rescue when a class is empty."""
+        if len(scores) == 0:
+            return np.zeros(0, dtype=bool)
+        keep = scores >= self.conf_thres[cls_ids]
+        for c in np.unique(cls_ids):
+            bonus = float(self.rescue_bonus[c])
+            if bonus <= 0.0:
+                continue
+            cm = cls_ids == c
+            if keep[cm].any():
+                continue
+            idx = np.where(cm)[0]
+            top = int(idx[int(np.argmax(scores[idx]))])
+            if scores[top] >= self.conf_thres[c] - bonus:
+                keep[top] = True
+        return keep
+
+    def _cross_class_dedup(self, boxes, scores, cls_ids, iou_thresh):
+        n = len(boxes)
+        if n <= 1:
+            return boxes, scores, cls_ids
+        areas = np.maximum(0.0, boxes[:, 2] - boxes[:, 0]) * np.maximum(0.0, boxes[:, 3] - boxes[:, 1])
+        margins = scores - self.conf_thres[cls_ids]
+        order = np.lexsort((-areas, -margins))
+        suppressed = np.zeros(n, dtype=bool)
+        keep = []
+        for i in order:
+            if suppressed[i]:
+                continue
+            keep.append(int(i))
+            bi = boxes[i]
+            xx1 = np.maximum(bi[0], boxes[:, 0])
+            yy1 = np.maximum(bi[1], boxes[:, 1])
+            xx2 = np.minimum(bi[2], boxes[:, 2])
+            yy2 = np.minimum(bi[3], boxes[:, 3])
+            inter = np.maximum(0.0, xx2 - xx1) * np.maximum(0.0, yy2 - yy1)
+            a_i = max(1e-7, float((bi[2] - bi[0]) * (bi[3] - bi[1])))
+            iou = inter / (a_i + areas - inter + 1e-7)
+            dup = iou > iou_thresh
+            dup[i] = False
+            suppressed |= dup
+        keep_idx = np.asarray(keep, dtype=np.intp)
+        return boxes[keep_idx], scores[keep_idx], cls_ids[keep_idx]
+
+    def _filter_boxes(self, boxes, scores, cls_ids, image_size):
         if len(boxes) == 0:
             return boxes, scores, cls_ids
         bw = np.maximum(0.0, boxes[:, 2] - boxes[:, 0])
@@ -154,41 +225,107 @@ class Miner:
         )
         return boxes[keep], scores[keep], cls_ids[keep]
 
-    def _postprocess(self, output: np.ndarray, ratio: float, pad: tuple[float, float], image_size: tuple[int, int]) -> list[BoundingBox]:
+    @staticmethod
+    def _max_score_per_cluster(post_boxes, post_cls, full_boxes, full_scores, full_cls, iou_thresh):
+        n = len(post_boxes)
+        if n == 0:
+            return np.empty(0, dtype=np.float32)
+        full_areas = (np.maximum(0.0, full_boxes[:, 2] - full_boxes[:, 0]) *
+                      np.maximum(0.0, full_boxes[:, 3] - full_boxes[:, 1]))
+        out = np.empty(n, dtype=np.float32)
+        for i in range(n):
+            bi = post_boxes[i]
+            xx1 = np.maximum(bi[0], full_boxes[:, 0])
+            yy1 = np.maximum(bi[1], full_boxes[:, 1])
+            xx2 = np.minimum(bi[2], full_boxes[:, 2])
+            yy2 = np.minimum(bi[3], full_boxes[:, 3])
+            inter = np.maximum(0.0, xx2 - xx1) * np.maximum(0.0, yy2 - yy1)
+            a_i = max(0.0, float((bi[2] - bi[0]) * (bi[3] - bi[1])))
+            iou = inter / (a_i + full_areas - inter + 1e-7)
+            cluster = (iou >= iou_thresh) & (full_cls == post_cls[i])
+            out[i] = float(np.max(full_scores[cluster])) if np.any(cluster) else 0.0
+        return out
+
+    def _decode_one_view(self, output, ratio, pad, image_size):
         if output.ndim == 3 and output.shape[0] == 1:
             output = output[0]
         if output.ndim != 2:
             raise ValueError(f"Unexpected ONNX output shape: {output.shape}")
-        if output.shape[0] == 4 + len(self.class_names):
-            output = output.T
-        if output.shape[1] < 5:
-            raise ValueError(f"Unexpected ONNX output shape: {output.shape}")
-        boxes_xywh = output[:, :4].astype(np.float32)
-        class_scores = output[:, 4 : 4 + len(self.class_names)].astype(np.float32)
-        cls_ids = np.argmax(class_scores, axis=1).astype(np.int32)
-        scores = class_scores[np.arange(len(class_scores)), cls_ids]
-        keep = scores >= self.conf_thres[cls_ids]
-        boxes_xywh, scores, cls_ids = boxes_xywh[keep], scores[keep], cls_ids[keep]
+        if output.shape[1] >= 6 and output.shape[1] == 6:
+            # already final detections: [x1,y1,x2,y2,score,cls]
+            boxes = output[:, :4].astype(np.float32)
+            scores = output[:, 4].astype(np.float32)
+            cls_ids = output[:, 5].astype(np.int32)
+            boxes_xyxy_already = True
+        else:
+            if output.shape[0] == 4 + len(self.class_names):
+                output = output.T
+            if output.shape[1] < 5:
+                raise ValueError(f"Unexpected ONNX output shape: {output.shape}")
+            boxes_xywh = output[:, :4].astype(np.float32)
+            class_scores = output[:, 4 : 4 + len(self.class_names)].astype(np.float32)
+            cls_ids = np.argmax(class_scores, axis=1).astype(np.int32)
+            scores = class_scores[np.arange(len(class_scores)), cls_ids]
+            boxes = self._xywh_to_xyxy(boxes_xywh)
+            boxes_xyxy_already = False
+
+        keep = self._conf_filter_mask(scores, cls_ids)
+        boxes, scores, cls_ids = boxes[keep], scores[keep], cls_ids[keep]
         if len(scores) == 0:
-            return []
-        boxes = self._xywh_to_xyxy(boxes_xywh)
+            return boxes, scores, cls_ids
+
         boxes[:, [0, 2]] -= pad[0]
         boxes[:, [1, 3]] -= pad[1]
         boxes /= ratio
         boxes = self._clip_boxes(boxes, image_size)
         boxes, scores, cls_ids = self._filter_boxes(boxes, scores, cls_ids, image_size)
-        kept = []
-        for cls_id in np.unique(cls_ids):
-            idx = np.where(cls_ids == cls_id)[0]
-            cls_keep = self._nms(boxes[idx], scores[idx], self.iou_thres)
-            kept.extend(idx[cls_keep].tolist())
-        if not kept:
+        return boxes, scores, cls_ids
+
+    def _infer_view(self, image):
+        tensor, ratio, pad, image_size = self._preprocess(image)
+        outputs = self.session.run(self.output_names, {self.input_name: tensor})
+        return self._decode_one_view(outputs[0], ratio, pad, image_size), image_size
+
+    def _predict_one(self, image: ndarray) -> list[BoundingBox]:
+        if image.dtype != np.uint8:
+            image = image.astype(np.uint8)
+        (boxes_o, scores_o, cls_o), image_size = self._infer_view(image)
+        if self.use_tta:
+            flipped = cv2.flip(image, 1)
+            (boxes_f, scores_f, cls_f), _ = self._infer_view(flipped)
+            if len(boxes_f) > 0:
+                w = image_size[0]
+                x1 = w - boxes_f[:, 2]
+                x2 = w - boxes_f[:, 0]
+                boxes_f = np.stack([x1, boxes_f[:, 1], x2, boxes_f[:, 3]], axis=1).astype(np.float32)
+            boxes = np.concatenate([boxes_o, boxes_f], axis=0) if len(boxes_f) else boxes_o
+            scores = np.concatenate([scores_o, scores_f], axis=0) if len(scores_f) else scores_o
+            cls_ids = np.concatenate([cls_o, cls_f], axis=0) if len(cls_f) else cls_o
+        else:
+            boxes, scores, cls_ids = boxes_o, scores_o, cls_o
+
+        if len(boxes) == 0:
             return []
-        kept = np.asarray(kept, dtype=np.intp)
-        if len(kept) > self.max_det:
-            kept = kept[np.argsort(-scores[kept])[: self.max_det]]
+
+        full_boxes, full_scores, full_cls = boxes.copy(), scores.copy(), cls_ids.copy()
+
+        keep = self._per_class_hard_nms(boxes, scores, cls_ids, self.iou_thres)
+        if len(keep) == 0:
+            return []
+        boxes, scores, cls_ids = boxes[keep], scores[keep], cls_ids[keep]
+
+        if len(boxes) > self.max_det:
+            top = np.argsort(-scores)[: self.max_det]
+            boxes, scores, cls_ids = boxes[top], scores[top], cls_ids[top]
+
+        if self.use_tta and len(boxes) > 0:
+            scores = self._max_score_per_cluster(boxes, cls_ids, full_boxes, full_scores, full_cls, self.iou_thres)
+
+        if len(boxes) > 1:
+            boxes, scores, cls_ids = self._cross_class_dedup(boxes, scores, cls_ids, self.cross_iou_thres)
+
         out = []
-        for box, score, cls_id in zip(boxes[kept], scores[kept], cls_ids[kept]):
+        for box, score, cls_id in zip(boxes, scores, cls_ids):
             x1, y1, x2, y2 = box.tolist()
             if x2 <= x1 or y2 <= y1:
                 continue
@@ -204,13 +341,6 @@ class Miner:
             )
         return out
 
-    def _predict_one(self, image: ndarray) -> list[BoundingBox]:
-        if image.dtype != np.uint8:
-            image = image.astype(np.uint8)
-        tensor, ratio, pad, image_size = self._preprocess(image)
-        outputs = self.session.run(self.output_names, {self.input_name: tensor})
-        return self._postprocess(outputs[0], ratio, pad, image_size)
-
     def predict_batch(self, batch_images: list[ndarray], offset: int, n_keypoints: int) -> list[TVFrameResult]:
         results = []
         keypoints = [(0, 0) for _ in range(max(0, int(n_keypoints)))]
@@ -224,6 +354,32 @@ class Miner:
         return results
 '''
 
+CHUTE_CONFIG_TEMPLATE = """Image:
+  from_base: parachutes/python:3.12
+  run_command:
+    - pip install --upgrade pip
+    - pip install 'numpy>=2.0' 'opencv-python-headless>=4.10' 'pydantic>=2.12' 'onnxruntime-gpu>=1.20'
+    - python -c "import cv2, numpy, onnxruntime, pydantic; print('public-detect deps ok')"
+
+NodeSelector:
+  gpu_count: 1
+  min_vram_gb_per_gpu: 16
+  exclude:
+    - a100
+    - h100
+    - h200
+    - b200
+    - h20
+    - mi300x
+    - "5090"
+
+Chute:
+  shutdown_after_seconds: 300
+  concurrency: 4
+  max_instances: 1
+  scaling_threshold: 0.75
+"""
+
 
 def build_deploy_repo(
     *,
@@ -232,21 +388,29 @@ def build_deploy_repo(
     class_names: list[str],
     input_size: int,
     conf_thresholds: list[float],
-    max_det: int = 20,
+    rescue_bonus: list[float] | None = None,
+    use_tta: bool = True,
+    max_det: int = 300,
     iou_thres: float = 0.4,
     cross_iou_thres: float = 0.7,
-    min_side: float = 4.0,
-    min_box_area: float = 16.0,
-    max_aspect_ratio: float = 12.0,
+    min_side: float = 8.0,
+    min_box_area: float = 100.0,
+    max_aspect_ratio: float = 10.0,
     max_mb: float = 30.0,
 ) -> dict[str, Any]:
+    if rescue_bonus is None:
+        rescue_bonus = [0.0] * len(class_names)
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(weights, output / "weights.onnx")
+    target_weights = output / "weights.onnx"
+    if Path(weights).resolve() != target_weights.resolve():
+        shutil.copy2(weights, target_weights)
     miner = render_miner(
         class_names=class_names,
         input_size=input_size,
         conf_thresholds=conf_thresholds,
+        rescue_bonus=rescue_bonus,
+        use_tta=use_tta,
         max_det=max_det,
         iou_thres=iou_thres,
         cross_iou_thres=cross_iou_thres,
@@ -255,10 +419,13 @@ def build_deploy_repo(
         max_aspect_ratio=max_aspect_ratio,
     )
     (output / "miner.py").write_text(miner)
+    (output / "chute_config.yml").write_text(CHUTE_CONFIG_TEMPLATE)
     config = {
         "class_names": class_names,
         "input_size": input_size,
         "conf_thresholds": conf_thresholds,
+        "rescue_bonus": rescue_bonus,
+        "use_tta": use_tta,
         "max_det": max_det,
         "iou_thres": iou_thres,
         "cross_iou_thres": cross_iou_thres,
@@ -277,6 +444,8 @@ def render_miner(
     class_names: list[str],
     input_size: int,
     conf_thresholds: list[float],
+    rescue_bonus: list[float],
+    use_tta: bool,
     max_det: int,
     iou_thres: float,
     cross_iou_thres: float,
@@ -286,10 +455,14 @@ def render_miner(
 ) -> str:
     if len(class_names) != len(conf_thresholds):
         raise ValueError("class_names and conf_thresholds must have the same length")
+    if len(class_names) != len(rescue_bonus):
+        raise ValueError("class_names and rescue_bonus must have the same length")
     replacements = {
         "__CLASS_NAMES__": repr(class_names),
         "__INPUT_SIZE__": str(int(input_size)),
         "__CONF_THRESHOLDS__": repr([float(item) for item in conf_thresholds]),
+        "__RESCUE_BONUS__": repr([float(item) for item in rescue_bonus]),
+        "__USE_TTA__": "True" if use_tta else "False",
         "__MAX_DET__": str(int(max_det)),
         "__IOU_THRES__": repr(float(iou_thres)),
         "__CROSS_IOU_THRES__": repr(float(cross_iou_thres)),

@@ -1,0 +1,8 @@
+path: /home/ubuntu/pd/data/yolo/beverage_phase4_iter2_v1
+train: images/train
+val: images/val
+nc: 3
+names:
+  0: cup
+  1: bottle
+  2: can

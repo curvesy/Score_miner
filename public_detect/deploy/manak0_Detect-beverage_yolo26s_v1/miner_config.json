@@ -1,0 +1,25 @@
+{
+  "class_names": [
+    "cup",
+    "bottle",
+    "can"
+  ],
+  "conf_thresholds": [
+    0.6,
+    0.45,
+    0.5
+  ],
+  "cross_iou_thres": 0.7,
+  "input_size": 1280,
+  "iou_thres": 0.4,
+  "max_aspect_ratio": 10.0,
+  "max_det": 300,
+  "min_box_area": 100.0,
+  "min_side": 8.0,
+  "rescue_bonus": [
+    0.0,
+    0.0,
+    0.2
+  ],
+  "use_tta": true
+}

@@ -34,6 +34,7 @@ TRAIN_KEYS = {
     "amp",
     "plots",
     "val",
+    "save_period",
     "project",
     "name",
 }
@@ -105,6 +106,8 @@ def train_args(config: dict[str, Any], overrides: argparse.Namespace) -> dict[st
         args["batch"] = overrides.batch
     if overrides.device is not None:
         args["device"] = overrides.device
+    if overrides.save_period is not None:
+        args["save_period"] = overrides.save_period
     if overrides.name_suffix:
         args["name"] = f"{args.get('name', Path(config['model']).stem)}_{overrides.name_suffix}"
     return args
@@ -125,16 +128,43 @@ def main() -> None:
     parser.add_argument("--batch", type=int)
     parser.add_argument("--device")
     parser.add_argument("--name-suffix")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume from the expected run directory's weights/last.pt.",
+    )
+    parser.add_argument(
+        "--resume-from",
+        type=Path,
+        help="Resume from an explicit checkpoint path, usually runs/.../weights/last.pt.",
+    )
+    parser.add_argument(
+        "--save-period",
+        type=int,
+        help="Save a checkpoint every N epochs. Ultralytics default is -1.",
+    )
     args = parser.parse_args()
 
     config = load_config(args.config)
     summary = validate_config(config)
     fit_args = train_args(config, args)
+    resume_checkpoint = None
+    if args.resume and args.resume_from:
+        raise SystemExit("use either --resume or --resume-from, not both")
+    if args.resume:
+        resume_checkpoint = Path(expected_run_dir(fit_args)) / "weights" / "last.pt"
+    elif args.resume_from:
+        resume_checkpoint = project_path(args.resume_from)
+    if resume_checkpoint is not None:
+        if not resume_checkpoint.exists():
+            raise FileNotFoundError(f"resume checkpoint does not exist: {resume_checkpoint}")
+        fit_args["resume"] = True
     print(
         json.dumps(
             {
                 "summary": summary,
                 "train_args": fit_args,
+                "resume_checkpoint": str(resume_checkpoint) if resume_checkpoint else None,
                 "expected_run_dir": expected_run_dir(fit_args),
                 "expected_best_checkpoint": str(Path(expected_run_dir(fit_args)) / "weights" / "best.pt"),
                 "expected_last_checkpoint": str(Path(expected_run_dir(fit_args)) / "weights" / "last.pt"),
@@ -145,7 +175,7 @@ def main() -> None:
     if args.dry_run:
         return
 
-    model = YOLO(str(config["model"]))
+    model = YOLO(str(resume_checkpoint if resume_checkpoint else config["model"]))
     model.train(**fit_args)
 
 

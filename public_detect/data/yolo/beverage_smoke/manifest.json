@@ -1,0 +1,425 @@
+{
+  "class_counts": {
+    "bottle": 394,
+    "can": 82,
+    "cup": 577
+  },
+  "counts": {
+    "train": 35,
+    "val": 14
+  },
+  "element_id": "manak0/Detect-beverage-detect",
+  "objects": [
+    "cup",
+    "bottle",
+    "can"
+  ],
+  "rows": [
+    {
+      "boxes": 19,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000000_7c07b06db13e448fa7d8098346965fb3.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000000_7c07b06db13e448fa7d8098346965fb3.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/7c07b06db13e448fa7d8098346965fb3.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 19,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000000_7c07b06db13e448fa7d8098346965fb3.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000000_7c07b06db13e448fa7d8098346965fb3.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/7c07b06db13e448fa7d8098346965fb3.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 21,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000001_737adfef5a324338ad95c2b87cbbf2a6.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000001_737adfef5a324338ad95c2b87cbbf2a6.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/737adfef5a324338ad95c2b87cbbf2a6.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 21,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000001_737adfef5a324338ad95c2b87cbbf2a6.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000001_737adfef5a324338ad95c2b87cbbf2a6.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/737adfef5a324338ad95c2b87cbbf2a6.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 14,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000002_b07d96c42ad842cc9b9987df27a3d20c.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000002_b07d96c42ad842cc9b9987df27a3d20c.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/b07d96c42ad842cc9b9987df27a3d20c.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 14,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000002_b07d96c42ad842cc9b9987df27a3d20c.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000002_b07d96c42ad842cc9b9987df27a3d20c.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/b07d96c42ad842cc9b9987df27a3d20c.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 22,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000003_087c03a8b369467fb2cd0de44ebd3211.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000003_087c03a8b369467fb2cd0de44ebd3211.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/087c03a8b369467fb2cd0de44ebd3211.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 22,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000003_087c03a8b369467fb2cd0de44ebd3211.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000003_087c03a8b369467fb2cd0de44ebd3211.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/087c03a8b369467fb2cd0de44ebd3211.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 9,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000004_a5271a3ef0ab4792b89d13ae40ae0844.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000004_a5271a3ef0ab4792b89d13ae40ae0844.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/a5271a3ef0ab4792b89d13ae40ae0844.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 9,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000004_a5271a3ef0ab4792b89d13ae40ae0844.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000004_a5271a3ef0ab4792b89d13ae40ae0844.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/a5271a3ef0ab4792b89d13ae40ae0844.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 10,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000005_a1603897ebea46ef94ec3af04b21cdf2.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000005_a1603897ebea46ef94ec3af04b21cdf2.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/a1603897ebea46ef94ec3af04b21cdf2.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 10,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000005_a1603897ebea46ef94ec3af04b21cdf2.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000005_a1603897ebea46ef94ec3af04b21cdf2.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/a1603897ebea46ef94ec3af04b21cdf2.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 20,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/starter_000006_8c47c68f7bf8432b8746714e14c08cdb.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/starter_000006_8c47c68f7bf8432b8746714e14c08cdb.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/8c47c68f7bf8432b8746714e14c08cdb.png",
+      "source_tag": "starter",
+      "split": "val"
+    },
+    {
+      "boxes": 20,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/starter_000006_8c47c68f7bf8432b8746714e14c08cdb.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/starter_000006_8c47c68f7bf8432b8746714e14c08cdb.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_starter/images/train/8c47c68f7bf8432b8746714e14c08cdb.png",
+      "source_tag": "starter",
+      "split": "train"
+    },
+    {
+      "boxes": 18,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000000_b09605b8f7e1693825fe381b7be4257b.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000000_b09605b8f7e1693825fe381b7be4257b.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/b09605b8f7e1693825fe381b7be4257b.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 20,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000001_2679c8e4d373e8cce2051f786ce97bb4.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000001_2679c8e4d373e8cce2051f786ce97bb4.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/2679c8e4d373e8cce2051f786ce97bb4.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 20,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000002_c738a4e55b00f727efa2e84161a3b76d.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000002_c738a4e55b00f727efa2e84161a3b76d.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/c738a4e55b00f727efa2e84161a3b76d.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 13,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000003_261737a374395aa9e1c7ae0add478eab.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000003_261737a374395aa9e1c7ae0add478eab.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/261737a374395aa9e1c7ae0add478eab.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 11,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000004_7bbd88e261aade14f57b432884e64aa1.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000004_7bbd88e261aade14f57b432884e64aa1.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/7bbd88e261aade14f57b432884e64aa1.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 38,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000005_b4cde91e841d784624b2c3c589c96997.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000005_b4cde91e841d784624b2c3c589c96997.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/b4cde91e841d784624b2c3c589c96997.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 32,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000006_84da683d5106cd1a7bb24af28297c841.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000006_84da683d5106cd1a7bb24af28297c841.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/84da683d5106cd1a7bb24af28297c841.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 18,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000007_a36d7b213dae876193730051f76a9f45.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000007_a36d7b213dae876193730051f76a9f45.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/a36d7b213dae876193730051f76a9f45.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 63,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000008_302ae96922f5db469a287acbe5ffcc94.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000008_302ae96922f5db469a287acbe5ffcc94.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/302ae96922f5db469a287acbe5ffcc94.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 25,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000009_dfabf41dd6f4c4af476ab8198d757d58.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000009_dfabf41dd6f4c4af476ab8198d757d58.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/dfabf41dd6f4c4af476ab8198d757d58.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 22,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000010_68db9adde60d6625f7d4d5c9111ad4bc.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000010_68db9adde60d6625f7d4d5c9111ad4bc.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/68db9adde60d6625f7d4d5c9111ad4bc.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 27,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000011_9cd95d2627d93b8c548754f31e30e0b5.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000011_9cd95d2627d93b8c548754f31e30e0b5.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/9cd95d2627d93b8c548754f31e30e0b5.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 25,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000012_24a1eadc67f30686fbdb64fb134ce1aa.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000012_24a1eadc67f30686fbdb64fb134ce1aa.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/24a1eadc67f30686fbdb64fb134ce1aa.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 17,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000013_5904a016a5abc3d72c84d64583dad280.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000013_5904a016a5abc3d72c84d64583dad280.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/5904a016a5abc3d72c84d64583dad280.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 7,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000014_a687985176496e14e0d2eff943ed63f8.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000014_a687985176496e14e0d2eff943ed63f8.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/a687985176496e14e0d2eff943ed63f8.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 7,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000015_062baea34183b4088e30482d2e21ada5.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000015_062baea34183b4088e30482d2e21ada5.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/062baea34183b4088e30482d2e21ada5.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 36,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000016_49fbf781f87098c2e34bf2fb65a0fe2d.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000016_49fbf781f87098c2e34bf2fb65a0fe2d.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/49fbf781f87098c2e34bf2fb65a0fe2d.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 14,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000017_3b781d100138d8455e5560bd227e2524.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000017_3b781d100138d8455e5560bd227e2524.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/3b781d100138d8455e5560bd227e2524.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 24,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000018_8f005d4a692f3089a99309ee90881835.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000018_8f005d4a692f3089a99309ee90881835.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/8f005d4a692f3089a99309ee90881835.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 16,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000019_bb26e8fd231b998ac624b47fd06e6411.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000019_bb26e8fd231b998ac624b47fd06e6411.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/bb26e8fd231b998ac624b47fd06e6411.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 22,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000020_526975fe51b8f973bfe1972222b605af.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000020_526975fe51b8f973bfe1972222b605af.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/526975fe51b8f973bfe1972222b605af.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 41,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000021_86445292c9d85706bd0ef6ef3215d6fd.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000021_86445292c9d85706bd0ef6ef3215d6fd.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/86445292c9d85706bd0ef6ef3215d6fd.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 11,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000022_32edba816a3db8acdeedbe6ebf487063.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000022_32edba816a3db8acdeedbe6ebf487063.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/32edba816a3db8acdeedbe6ebf487063.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 26,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000023_97958933c3ff15d6f4f1fd953b5bd644.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000023_97958933c3ff15d6f4f1fd953b5bd644.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/97958933c3ff15d6f4f1fd953b5bd644.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 10,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000024_72856e1fee0a1f1e059f0b04b4d6e06e.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000024_72856e1fee0a1f1e059f0b04b4d6e06e.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/72856e1fee0a1f1e059f0b04b4d6e06e.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 28,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000025_a075d39af5aa6013f66e8e7267d5e724.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000025_a075d39af5aa6013f66e8e7267d5e724.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/a075d39af5aa6013f66e8e7267d5e724.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 37,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000026_24bb1f124de9206781345fb93770366d.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000026_24bb1f124de9206781345fb93770366d.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/24bb1f124de9206781345fb93770366d.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 21,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000027_bc680b0d41529183facc57953cdcbda3.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000027_bc680b0d41529183facc57953cdcbda3.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/bc680b0d41529183facc57953cdcbda3.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 34,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000028_011e67631c0eb82d310d5feca975788d.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000028_011e67631c0eb82d310d5feca975788d.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/011e67631c0eb82d310d5feca975788d.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 14,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000029_e0f9c9fcdb45b2cdf62a382147cae4a4.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000029_e0f9c9fcdb45b2cdf62a382147cae4a4.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/e0f9c9fcdb45b2cdf62a382147cae4a4.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 19,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/val/manako_world_000030_0819026a9268ac683026c25d5e0fe164.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/val/manako_world_000030_0819026a9268ac683026c25d5e0fe164.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/0819026a9268ac683026c25d5e0fe164.png",
+      "source_tag": "manako_world",
+      "split": "val"
+    },
+    {
+      "boxes": 13,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000031_f21c08d35a3a02cfab2e13741e6ca243.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000031_f21c08d35a3a02cfab2e13741e6ca243.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/f21c08d35a3a02cfab2e13741e6ca243.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 26,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000032_0124069fe8fba46b69309215364d92b9.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000032_0124069fe8fba46b69309215364d92b9.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/0124069fe8fba46b69309215364d92b9.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 2,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000033_7eb569fd081c9a4fd20b4f1cc863b5a9.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000033_7eb569fd081c9a4fd20b4f1cc863b5a9.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/7eb569fd081c9a4fd20b4f1cc863b5a9.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    },
+    {
+      "boxes": 66,
+      "image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/images/train/manako_world_000034_5b7362c6a2a624625ff441b80274f7cd.png",
+      "label": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_smoke/labels/train/manako_world_000034_5b7362c6a2a624625ff441b80274f7cd.txt",
+      "source_image": "/home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo_candidates/beverage_manako_autolabeled/images/train/5b7362c6a2a624625ff441b80274f7cd.png",
+      "source_tag": "manako_world",
+      "split": "train"
+    }
+  ],
+  "source_counts": {
+    "manako_world": {
+      "train": 28,
+      "val": 7
+    },
+    "starter": {
+      "train": 7,
+      "val": 7
+    }
+  },
+  "sources": [
+    "manako_world",
+    "starter"
+  ]
+}
