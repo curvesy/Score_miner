@@ -1,8 +1,0 @@
-path: /home/sina/projects/validator_improve/score_miner_project/public_detect/data/yolo/beverage_phase4_taco_only_v1
-train: images/train
-val: images/val
-nc: 3
-names:
-  0: cup
-  1: bottle
-  2: can

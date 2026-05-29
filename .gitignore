@@ -33,6 +33,8 @@ public_detect/data/raw/
 public_detect/data/proof_frames/**
 !public_detect/data/proof_frames/.gitkeep
 public_detect/data/yolo_candidates/
+# Built YOLO datasets are large + reproducible; ship them to GPUs via rsync, not git.
+public_detect/data/yolo/
 public_detect/reports/source_reviews/
 public_detect/reports/failure_reviews/**/crops/
 public_detect/reports/failure_reviews/**/full/
