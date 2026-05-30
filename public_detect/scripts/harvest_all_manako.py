@@ -72,9 +72,19 @@ def absolutize(ref):
     return ref if ref.startswith("http") else f"https://turbo.scoredata.me/{ref.lstrip('/')}"
 
 
+def _eval_block(ref: str) -> int | None:
+    name = ref.rsplit("/", 1)[-1]
+    match = re.match(r"(\d+)-", name)
+    return int(match.group(1)) if match else None
+
+
 def step_collect_eval_refs(args):
-    print(f"[index] fetching {MANAKO_INDEX}", flush=True)
-    idx = fetch_text(MANAKO_INDEX, timeout=180)
+    if args.index_file:
+        print(f"[index] loading {args.index_file}", flush=True)
+        idx = args.index_file.read_text()
+    else:
+        print(f"[index] fetching {MANAKO_INDEX}", flush=True)
+        idx = fetch_text(MANAKO_INDEX, timeout=180)
     if not idx:
         sys.exit("failed to fetch manako index")
     refs = sorted(set(REF_RE.findall(idx)), reverse=True)
@@ -83,6 +93,21 @@ def step_collect_eval_refs(args):
         if "detect-beverage" in r.lower() and "/evaluation/" in r
     ]
     print(f"[index] total beverage evals: {len(bev)}", flush=True)
+    blocks = [b for r in bev if (b := _eval_block(r)) is not None]
+    if args.last_blocks:
+        if not blocks:
+            sys.exit("could not infer eval blocks from refs")
+        latest = max(blocks)
+        args.min_eval_block = max(args.min_eval_block or 0, latest - args.last_blocks)
+        print(
+            f"[index] latest eval block={latest}; filtering to >= {args.min_eval_block} "
+            f"(last_blocks={args.last_blocks})",
+            flush=True,
+        )
+    if args.min_eval_block:
+        before = len(bev)
+        bev = [r for r in bev if (_eval_block(r) or -1) >= args.min_eval_block]
+        print(f"[index] block-filtered evals: {len(bev)} of {before}", flush=True)
     if args.max_evals:
         bev = bev[: args.max_evals]
         print(f"[index] capped to {len(bev)} newest evals", flush=True)
@@ -261,6 +286,12 @@ def main():
                    help="miner box conf floor for inclusion as proxy GT")
     p.add_argument("--max-evals", type=int, default=None,
                    help="cap newest N evals to scan (default: all 12k)")
+    p.add_argument("--index-file", type=Path, default=None,
+                   help="load Manako index from a local file instead of fetching")
+    p.add_argument("--min-eval-block", type=int, default=None,
+                   help="only scan eval refs with block prefix >= this value")
+    p.add_argument("--last-blocks", type=int, default=None,
+                   help="only scan eval refs within N blocks of the newest eval block")
     p.add_argument("--workers", type=int, default=60)
     p.add_argument("--skip-scrape", action="store_true",
                    help="reuse output-dir/images_raw + cached_meta.json")

@@ -1,0 +1,21 @@
+{
+  "dynamic": false,
+  "exported_model": "/home/ubuntu/Score_miner/public_detect/runs/beverage/yolo26s_modelB/weights/best.onnx",
+  "files": [
+    {
+      "bytes": 19407468,
+      "path": "weights.onnx"
+    }
+  ],
+  "half": true,
+  "imgsz": 1280,
+  "max_bytes": 30000000,
+  "max_mb_decimal": 30.0,
+  "opset": 17,
+  "passes": true,
+  "path": "/home/ubuntu/Score_miner/public_detect/deploy/modelB_onnx",
+  "repo_model": "/home/ubuntu/Score_miner/public_detect/deploy/modelB_onnx/weights.onnx",
+  "size_bytes": 19407468,
+  "size_mb_decimal": 19.407468,
+  "source_model": "/home/ubuntu/Score_miner/public_detect/runs/beverage/yolo26s_modelB/weights/best.pt"
+}

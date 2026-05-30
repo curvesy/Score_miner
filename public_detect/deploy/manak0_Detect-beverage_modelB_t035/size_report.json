@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "bytes": 531,
+      "path": "chute_config.yml"
+    },
+    {
+      "bytes": 14555,
+      "path": "miner.py"
+    },
+    {
+      "bytes": 347,
+      "path": "miner_config.json"
+    },
+    {
+      "bytes": 19407468,
+      "path": "weights.onnx"
+    }
+  ],
+  "max_bytes": 30000000,
+  "max_mb_decimal": 30.0,
+  "passes": true,
+  "path": "/home/sina/projects/validator_improve/score_miner_project/public_detect/deploy/manak0_Detect-beverage_modelB_t035",
+  "size_bytes": 19422901,
+  "size_mb_decimal": 19.422901
+}
